@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './login-page.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
-import travelinklogo from './images/travelinklogo.png'; // Import the logo image
+import travelinklogo from '../../res/images/travelinklogo.png'; // Import the logo image
 
 const Login = () => {
   const navigate = useNavigate();
