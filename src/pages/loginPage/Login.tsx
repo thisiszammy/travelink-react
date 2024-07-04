@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './login-page.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
-import travelinklogo from '../../res/images/travelinklogo.png'; // Import the logo image
-
+import travelinkLogo from '../../res/images/travelinklogo.png';
 const Login = () => {
   const navigate = useNavigate();
 
@@ -27,7 +26,7 @@ const Login = () => {
       <div className="content-container">
         <div className="left-container">
           <div className="logo-container">
-            <img src={travelinklogo} className="logo-img" alt="Travelink Logo" />
+            <img src={travelinkLogo} className="logo-img" alt="Travelink Logo" />
           </div>
           <div className="login-form">
             <h2 className="text-center mb-1">Login</h2>
