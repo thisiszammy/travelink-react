@@ -8,7 +8,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     // Static credentials for registration
     const staticEmail = "test@example.com";
@@ -35,7 +35,7 @@ const Register = () => {
               className="form-control"
               id="username"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e: any) => setUsername(e.target.value)}
               required
             />
           </div>
@@ -46,7 +46,7 @@ const Register = () => {
               className="form-control"
               id="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: any) => setEmail(e.target.value)}
               required
             />
           </div>
@@ -57,7 +57,7 @@ const Register = () => {
               className="form-control"
               id="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e: any) => setPassword(e.target.value)}
               required
             />
           </div>
