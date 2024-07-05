@@ -2,7 +2,7 @@ import React,{ useState } from 'react'
 import bestsummerdestination from '../../res/images/best-summer-destination-1080x567.jpg'
 import './BookingForm.css'
 import { db } from '../../firebaseConfig'
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { addDoc, collection, doc, setDoc, startAfter } from 'firebase/firestore'
 
 const BookingForm = () => {
     const [lastName, setlastName] = useState<string>('')
@@ -19,6 +19,32 @@ const BookingForm = () => {
     const [cvv, setCvv] = useState<string>('')
     const [eContactName, setEContactName] = useState<string>('')
     const [eContact, setEContact] = useState<string>('')
+    const [errors, setErrors] = useState<Record<string, string | null>>({});
+
+    const validateForm = () => {
+        const newErrors: Record<string, string | null> = {
+          lastName: !lastName ? 'Last name is required' : null,
+          firstName: !firstName ? 'First name is required' : null,
+          email: !email ? 'Email is required' : null,
+          phoneNumber: !phoneNumber ? 'Phone number is required' : null,
+          tripid: !tripid ? 'Trip ID is required' : null,
+          startDate: !startDate ? 'Start date is required' : null,
+          endDate: !endDate ? 'End date is required' : null,
+          cardNumber: !cardNumber ? 'Card number to be used for payment is required' : null,
+          expiryDate: !expiryDate ? 'Card expiry date is missing' : null,
+          cvv: !cvv ? 'CVV is missing' : null,
+        };
+    
+        setErrors(newErrors);
+    
+        if (Object.values(newErrors).some(error => error !== null)) {
+          console.log("Missing information.");
+          setTimeout(() => {
+            setErrors({})
+          }, 6000);
+          return;
+        }
+      };    
 
     const handleExpiryDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let input = event.target.value;
@@ -48,6 +74,8 @@ const BookingForm = () => {
     }
 
     const handleSubmit = async() => {
+        validateForm();
+        return;
         let bookingInformation = {
             docid: '',
             lastname: lastName,
@@ -82,7 +110,7 @@ const BookingForm = () => {
     <div className='flex items-center justify-center w-screen h-screen bookingform whitespace-nowrap poppins-regular'>
       <div className='w-[80%] h-[80%] flex'>
 
-        <div className='bg-white w-2/3 h-full p-6 rounded-tl-[50px] rounded-bl-[50px] overflow-y-auto overflow-x-hidden'>
+        <div className='hide-scrollbar bg-white w-2/3 h-full p-4 rounded-tl-[20px] rounded-bl-[20px] overflow-y-auto overflow-x-hidden'>
             <h4>Personal Information</h4>
             <div className='flex flex-col'>
                 <div className='ml-10 flex items-center'>
@@ -92,7 +120,7 @@ const BookingForm = () => {
                         type='text'
                         value={lastName}
                         onChange={(e) => setlastName(e.target.value)}
-                        className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                        className={`${errors['lastName'] ? 'border-rose-600' : 'border-gray-300'} w-full mt-1 p-2 border-2 rounded-[10px]`}
                         placeholder='e.g. Dela Cruz'
                         />
                     </div>
@@ -102,7 +130,7 @@ const BookingForm = () => {
                         type='text'
                         value={firstName}
                         onChange={(e)=> setfirstName(e.target.value)}
-                        className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                        className={`${errors['firstName'] ? 'border-rose-600' : 'border border-gray-300'} w-full mt-1 p-2 border-2 rounded-[10px]`}
                         placeholder='e.g. Juan'
                         />
                     </div>
@@ -113,7 +141,7 @@ const BookingForm = () => {
                     <div className="flex-1 mr-4 flex items-center">
                         <label>Email Address:</label>
                         <input
-                        className="w-full mt-1 p-2 border border-gray-300 rounded-[15px]"
+                        className={`${errors['email'] ? 'border-rose-600' : 'border-gray-300'} w-full mt-1 p-2 border-2 rounded-[10px]`}
                         type='email'
                         placeholder="e.g. juandelacruz@gmail.com"
                         value={email}
@@ -123,7 +151,7 @@ const BookingForm = () => {
                     <div className="flex-1 flex items-center">
                         <label>Phone Number:</label>
                         <input
-                        className="w-full mt-1 p-2 border border-gray-300 rounded-[15px]"
+                        className={`${errors['phoneNumber'] ? 'border-rose-600' : 'border-gray-300'} w-full mt-1 p-2 border-2 rounded-[10px]`}
                         placeholder="e.g. 09123456789"
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
@@ -141,7 +169,7 @@ const BookingForm = () => {
                     type='text'
                     value={tripid}
                     onChange={(e)=>setTripid(e.target.value)}
-                    className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                    className={`${errors['tripid'] ? 'border-rose-600' : 'border-gray-300'} w-full mt-1 p-2 border-2 rounded-[10px]`}
                     disabled
                     />
                 </div>
@@ -149,7 +177,7 @@ const BookingForm = () => {
                     <label className="">Tour Dates:</label>
                     <input 
                         type="date" 
-                        className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
+                        className={`${errors['startDate'] ? 'border-rose-600' : 'border-gray-300'} w-1/4 mt-1 p-2 border-2 rounded-[10px]`}
                         min={new Date().toISOString().split('T')[0]}
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
@@ -157,7 +185,7 @@ const BookingForm = () => {
                     <label>to</label>
                     <input 
                         type="date" 
-                        className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
+                        className={`${errors['endDate'] ? 'border-rose-600' : 'border-gray-300'} w-1/4 mt-1 p-2 border-2 rounded-[10px]`}
                         value={endDate}
                         min={new Date().toISOString().split('T')[0]}
                         onChange={(e) => setEndDate(e.target.value)}
@@ -169,7 +197,7 @@ const BookingForm = () => {
                         <label>Adults:</label>
                         <input
                             type='number'
-                            className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            className={`w-1/4 mt-1 p-2 border border-gray-300 rounded-[10px]`}
                             value={adults}
                             onChange={(e)=>setAdults(parseInt(e.target.value))}
                             min={1}
@@ -177,7 +205,7 @@ const BookingForm = () => {
                         <label>Children:</label>
                         <input
                             type='number'
-                            className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[10px]'
                             min={0}
                             value={children}
                             onChange={(e)=>setChildren(parseInt(e.target.value))}
@@ -193,7 +221,7 @@ const BookingForm = () => {
                             <label className="block">Card Number</label>
                             <input
                                 type='text'
-                                className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                                className={`${errors['cardNumber'] ? 'border-rose-600' : 'border-gray-300'} w-full mt-1 p-2 border-2 rounded-[10px]`}
                                 value={cardNumber}
                                 onChange={handleCardNumberChange}
                             />
@@ -206,7 +234,7 @@ const BookingForm = () => {
                                 value={expiryDate}
                                 onChange={handleExpiryDateChange}
                                 placeholder="MM/YY"
-                                className='w-1/6 mt-1 p-2 border border-gray-300 rounded-[15px] text-center'
+                                className={`${errors['expiryDate'] ? 'border-rose-600' : 'border-gray-300'} w-1/6 mt-1 p-2 border-2 rounded-[10px] text-center`}
                             />
                             <label className="block">CVV</label>
                             <input
@@ -214,20 +242,20 @@ const BookingForm = () => {
                             maxLength={3}
                             value={cvv}
                             onChange={handleCvvChange}
-                            className='w-1/6 mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            className={`${errors['cvv'] ? 'border-rose-600' : 'border-gray-300'} w-1/6 mt-1 p-2 border-2 rounded-[10px]`}
                             />
                         </div>
                     </div>
                 </div>
 
-            <h4 className='mt-[30px]'>Emergency Contact Information</h4>
+            <div className='flex items-center mt-[30px]'><h4>Emergency Contact Information</h4> <label className='ml-2 text-gray-600'>(Optional)</label></div>
             <div className='ml-10 flex items-center'>
                 <div className='w-full pr-4 flex flex-col'>
                     <div className='flex items-center'>
                         <label className="block">Contact Name</label>
                         <input
                             type='text'
-                            className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            className='w-full mt-1 p-2 border border-gray-300 rounded-[10px]'
                             value={eContactName}
                             onChange={(e)=>setEContactName(e.target.value)}
                         />
@@ -236,7 +264,7 @@ const BookingForm = () => {
                         <label className="block">Contact Phone Number/Email</label>
                         <input
                             type='text'
-                            className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            className='w-full mt-1 p-2 border border-gray-300 rounded-[10px]'
                             value={eContact}
                             onChange={(e)=> setEContact(e.target.value)}
                         />
@@ -245,7 +273,10 @@ const BookingForm = () => {
 
             </div>
 
-            <div className='w-full flex justify-end mt-[50px]'>
+            
+
+            <div className='w-full flex justify-end mt-[30px]'>
+                {Object.keys(errors).length > 0 && <div className='w-full flex justify-center items-center text-rose-600 text-lg'>Some information is missing</div>}
                 <button
                 className='bg-[#002B4A] py-3 px-4 text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
                 onClick={handleSubmit}
@@ -256,7 +287,7 @@ const BookingForm = () => {
         </div>
 
         <div
-            className='w-full h-full text-white rounded-tr-[50px] rounded-br-[50px]'
+            className='w-full h-full text-white rounded-tr-[20px] rounded-br-[20px]'
             style={{
                 backgroundImage: `url(${bestsummerdestination})`,
                 backgroundSize: 'cover',
