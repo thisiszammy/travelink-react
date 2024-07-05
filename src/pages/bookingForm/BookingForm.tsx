@@ -1,18 +1,26 @@
 import React,{ useState } from 'react'
 import bestsummerdestination from '../../res/images/best-summer-destination-1080x567.jpg'
 import './BookingForm.css'
-import { db } from '../../../firebaseConfig'
+import { db } from '../../firebaseConfig'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 
 const BookingForm = () => {
-    const [cardNumber, setCardNumber] = useState(null)
-    const [expiryDate, setExpiryDate] = useState(null)
-    const [cvv, setCvv] = useState(null)
-    const tripid = 'thisisasampleid123'
-    const userEmail = 'sampleuseremail@email.com'
+    const [lastName, setlastName] = useState<string>('')
+    const [firstName, setfirstName] = useState<string>('')
+    const [email, setEmail] = useState<string>('sampleuseremail@email.com')
+    const [phoneNumber, setPhoneNumber] = useState<string>('')
+    const [tripid, setTripid] = useState<string>('thisisasampleid123')
+    const [startDate, setStartDate] = useState<string>(new Date().toISOString().split('T')[0]);
+    const [endDate, setEndDate] = useState<string>();
+    const [adults, setAdults] = useState<number>(1);
+    const [children, setChildren] = useState<number>(0);
+    const [cardNumber, setCardNumber] = useState<string>('')
+    const [expiryDate, setExpiryDate] = useState<string>('')
+    const [cvv, setCvv] = useState<string>('')
+    const [eContactName, setEContactName] = useState<string>('')
+    const [eContact, setEContact] = useState<string>('')
 
-
-    //@ts-ignore
-    const handleExpiryDateChange = (event) => {
+    const handleExpiryDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let input = event.target.value;
         input = input.replace(/\D/g, '');
 
@@ -24,19 +32,49 @@ const BookingForm = () => {
             setExpiryDate(input);
         }
     };
-    //@ts-ignore
-    const handleCardNumberChange = (event) => {
+
+    const handleCardNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let input = event.target.value;
         input = input.replace(/\D/g, '');
 
         setCardNumber(input)
     }
-    //@ts-ignore
-    const handleCvvChange = (event) => {
+
+    const handleCvvChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let input = event.target.value;
         input = input.replace(/\D/g, '');
 
         setCvv(input)
+    }
+
+    const handleSubmit = async() => {
+        let bookingInformation = {
+            docid: '',
+            lastname: lastName,
+            firstname: firstName,
+            email: email,
+            phoneNumber: phoneNumber,
+            tripid: tripid,
+            startDate: startDate,
+            endDate: endDate,
+            adults: adults,
+            children: children,
+            cardNumber: cardNumber,
+            expiryDate: expiryDate,
+            cvv: cvv,
+            eContactName: eContactName,
+            eContact: eContact,
+        };
+
+        console.log(bookingInformation)
+        try {
+            const docRef = await addDoc(collection(db, "bookingReceipts"), bookingInformation);
+            await setDoc(doc(db, "bookingReceipts", docRef.id), {docid: docRef.id}, {merge:true})
+            console.log("Document successfully uploaded with ID:", docRef.id);
+            console.log("Document Successfully uploaded")
+        } catch (error) {
+            console.log(error)
+        }
     }
     
 
@@ -44,7 +82,7 @@ const BookingForm = () => {
     <div className='flex items-center justify-center w-screen h-screen bookingform whitespace-nowrap poppins-regular'>
       <div className='w-[80%] h-[80%] flex'>
 
-        <div className='bg-white w-full h-full p-6 rounded-tl-[50px] rounded-bl-[50px] overflow-y-auto overflow-x-hidden'>
+        <div className='bg-white w-2/3 h-full p-6 rounded-tl-[50px] rounded-bl-[50px] overflow-y-auto overflow-x-hidden'>
             <h4>Personal Information</h4>
             <div className='flex flex-col'>
                 <div className='ml-10 flex items-center'>
@@ -52,6 +90,8 @@ const BookingForm = () => {
                         <label className="block">Last Name:</label>
                         <input
                         type='text'
+                        value={lastName}
+                        onChange={(e) => setlastName(e.target.value)}
                         className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
                         placeholder='e.g. Dela Cruz'
                         />
@@ -60,16 +100,10 @@ const BookingForm = () => {
                         <label className="block">First Name:</label>
                         <input
                         type='text'
+                        value={firstName}
+                        onChange={(e)=> setfirstName(e.target.value)}
                         className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
                         placeholder='e.g. Juan'
-                        />
-                    </div>
-                    <div className='w-1/2 flex items-center'>
-                        <label className="block">Middle Name:</label>
-                        <input
-                        type='text'
-                        className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
-                        placeholder='e.g. Castorico'
                         />
                     </div>
                 </div>
@@ -80,7 +114,10 @@ const BookingForm = () => {
                         <label>Email Address:</label>
                         <input
                         className="w-full mt-1 p-2 border border-gray-300 rounded-[15px]"
+                        type='email'
                         placeholder="e.g. juandelacruz@gmail.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
                     <div className="flex-1 flex items-center">
@@ -88,6 +125,8 @@ const BookingForm = () => {
                         <input
                         className="w-full mt-1 p-2 border border-gray-300 rounded-[15px]"
                         placeholder="e.g. 09123456789"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                         />
                     </div>
                 </div>
@@ -101,6 +140,7 @@ const BookingForm = () => {
                     <input
                     type='text'
                     value={tripid}
+                    onChange={(e)=>setTripid(e.target.value)}
                     className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
                     disabled
                     />
@@ -111,11 +151,16 @@ const BookingForm = () => {
                         type="date" 
                         className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
                         min={new Date().toISOString().split('T')[0]}
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
                         />
                     <label>to</label>
                     <input 
                         type="date" 
                         className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
+                        value={endDate}
+                        min={new Date().toISOString().split('T')[0]}
+                        onChange={(e) => setEndDate(e.target.value)}
                         />
                 </div>
                 <div className='w-full flex flex-col mt-2'>
@@ -125,6 +170,8 @@ const BookingForm = () => {
                         <input
                             type='number'
                             className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            value={adults}
+                            onChange={(e)=>setAdults(parseInt(e.target.value))}
                             min={1}
                         />
                         <label>Children:</label>
@@ -132,6 +179,8 @@ const BookingForm = () => {
                             type='number'
                             className='w-1/4 mt-1 p-2 border border-gray-300 rounded-[15px]'
                             min={0}
+                            value={children}
+                            onChange={(e)=>setChildren(parseInt(e.target.value))}
                         />
                     </div>
                 </div>
@@ -145,7 +194,6 @@ const BookingForm = () => {
                             <input
                                 type='text'
                                 className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
-                                //@ts-ignore
                                 value={cardNumber}
                                 onChange={handleCardNumberChange}
                             />
@@ -155,7 +203,6 @@ const BookingForm = () => {
                             <label className="block">Card Expiry Date</label>
                             <input
                                 type="text"
-                                //@ts-ignore
                                 value={expiryDate}
                                 onChange={handleExpiryDateChange}
                                 placeholder="MM/YY"
@@ -165,7 +212,6 @@ const BookingForm = () => {
                             <input
                             type='text'
                             maxLength={3}
-                            //@ts-ignore
                             value={cvv}
                             onChange={handleCvvChange}
                             className='w-1/6 mt-1 p-2 border border-gray-300 rounded-[15px]'
@@ -182,6 +228,8 @@ const BookingForm = () => {
                         <input
                             type='text'
                             className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            value={eContactName}
+                            onChange={(e)=>setEContactName(e.target.value)}
                         />
                     </div>
                     <div className='flex items-center mt-2'>
@@ -189,6 +237,8 @@ const BookingForm = () => {
                         <input
                             type='text'
                             className='w-full mt-1 p-2 border border-gray-300 rounded-[15px]'
+                            value={eContact}
+                            onChange={(e)=> setEContact(e.target.value)}
                         />
                     </div>
                 </div>
@@ -198,6 +248,7 @@ const BookingForm = () => {
             <div className='w-full flex justify-end mt-[50px]'>
                 <button
                 className='bg-[#002B4A] py-3 px-4 text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
+                onClick={handleSubmit}
                 >
                     Book Now!
                 </button>
