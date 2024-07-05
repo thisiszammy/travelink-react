@@ -21,31 +21,6 @@ const BookingForm = () => {
     const [eContact, setEContact] = useState<string>('')
     const [errors, setErrors] = useState<Record<string, string | null>>({});
 
-    const validateForm = () => {
-        const newErrors: Record<string, string | null> = {
-          lastName: !lastName ? 'Last name is required' : null,
-          firstName: !firstName ? 'First name is required' : null,
-          email: !email ? 'Email is required' : null,
-          phoneNumber: !phoneNumber ? 'Phone number is required' : null,
-          tripid: !tripid ? 'Trip ID is required' : null,
-          startDate: !startDate ? 'Start date is required' : null,
-          endDate: !endDate ? 'End date is required' : null,
-          cardNumber: !cardNumber ? 'Card number to be used for payment is required' : null,
-          expiryDate: !expiryDate ? 'Card expiry date is missing' : null,
-          cvv: !cvv ? 'CVV is missing' : null,
-        };
-    
-        setErrors(newErrors);
-    
-        if (Object.values(newErrors).some(error => error !== null)) {
-          console.log("Missing information.");
-          setTimeout(() => {
-            setErrors({})
-          }, 6000);
-          return;
-        }
-      };    
-
     const handleExpiryDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let input = event.target.value;
         input = input.replace(/\D/g, '');
@@ -73,9 +48,40 @@ const BookingForm = () => {
         setCvv(input)
     }
 
+    const validateForm = (): boolean => {
+        const newErrors: Record<string, string | null> = {
+            lastName: !lastName ? 'Last name is required' : null,
+            firstName: !firstName ? 'First name is required' : null,
+            email: !email ? 'Email is required' : null,
+            phoneNumber: !phoneNumber ? 'Phone number is required' : null,
+            tripid: !tripid ? 'Trip ID is required' : null,
+            startDate: !startDate ? 'Start date is required' : null,
+            endDate: !endDate ? 'End date is required' : null,
+            cardNumber: !cardNumber ? 'Card number to be used for payment is required' : null,
+            expiryDate: !expiryDate ? 'Card expiry date is missing' : null,
+            cvv: !cvv ? 'CVV is missing' : null,
+        }
+
+        setErrors(newErrors)
+
+        const isValid = !Object.values(newErrors).some(error => error !== null)
+
+        if (!isValid) {
+            console.log("Missing information.")
+            setTimeout(() => {
+                setErrors({})
+            }, 6000)
+        }
+
+        return isValid
+    }
+  
+
     const handleSubmit = async() => {
-        validateForm();
-        return;
+        if (!validateForm()) {
+            return
+        }
+
         let bookingInformation = {
             docid: '',
             lastname: lastName,
@@ -87,9 +93,6 @@ const BookingForm = () => {
             endDate: endDate,
             adults: adults,
             children: children,
-            //cardNumber: cardNumber,
-            //expiryDate: expiryDate,
-            //cvv: cvv,
             eContactName: eContactName,
             eContact: eContact,
         };
@@ -110,7 +113,7 @@ const BookingForm = () => {
     <div className='flex items-center justify-center w-screen h-screen bookingform whitespace-nowrap poppins-regular'>
       <div className='w-[80%] h-[80%] flex'>
 
-        <div className='hide-scrollbar bg-white w-2/3 h-full p-4 rounded-tl-[20px] rounded-bl-[20px] overflow-y-auto overflow-x-hidden'>
+        <div className='hide-scrollbar bg-white w-2/3 h-full p-4 rounded-tl-[20px] rounded-bl-[20px] overflow-y-auto overflow-x-hidden transition-all'>
             <h4>Personal Information</h4>
             <div className='flex flex-col'>
                 <div className='ml-10 flex items-center'>
@@ -278,10 +281,16 @@ const BookingForm = () => {
             <div className='w-full flex justify-end mt-[30px]'>
                 {Object.keys(errors).length > 0 && <div className='w-full flex justify-center items-center text-rose-600 text-lg'>Some information is missing</div>}
                 <button
-                className='bg-[#002B4A] py-3 px-4 text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
-                onClick={handleSubmit}
+                    className='bg-[#002B4A] py-3 px-4 text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
+                    onClick={handleSubmit}
                 >
                     Book Now!
+                </button>
+                <button
+                    className='bg-[#9AA5AC] ml-4 py-3 px-4 text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
+                    //onClick={handleSubmit}
+                >
+                    Cancel
                 </button>
             </div>
         </div>
