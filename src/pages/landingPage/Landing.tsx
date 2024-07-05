@@ -12,13 +12,13 @@ const Landing: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="main-container">
-      <div className="content-container">
-        <div className="left-container">
-          <div className="logo-container">
+    <div className="main-container1">
+      <div className="content-container1">
+        <div className="left-container1">
+          <div className="logo-container1">
             <img src={travelinkLogo} className="logo-img" alt="Travelink Logo" />
           </div>
-          <div className="landing-content">
+          <div className="landing-content1">
             <h1 className="text-center mb-4">Welcome to Travelink</h1>
             <p className="text-center lead">
               Discover the beauty of Cebu Islands. Your adventure begins here!

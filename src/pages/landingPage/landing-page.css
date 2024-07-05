@@ -1,28 +1,24 @@
-.main-container {
+.main-container1 {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(to right, #0062E6, #33AEFF);
-    color: #fff;
+    color: #473535;
   }
   
-  .content-container {
+  .content-container1 {
     background: rgba(255, 255, 255, 0.85);
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   }
   
-  .left-container {
+  .left-container1 {
     max-width: 800px;
     margin: auto;
     text-align: center;
   }
   
-  .logo-container {
-    margin-bottom: 20px;
-  }
   
   .logo-img {
     width: 150px;
@@ -31,6 +27,7 @@
   
   .landing-content {
     animation: fadeIn 2s ease-in-out;
+    
   }
   
   .image-gallery {
@@ -47,7 +44,6 @@
   }
   
   .btn-primary {
-    background-color: #0062E6;
     border: none;
     transition: background-color 0.3s ease-in-out;
   }
