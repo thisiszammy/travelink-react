@@ -59,9 +59,9 @@ const BookingForm = () => {
             endDate: endDate,
             adults: adults,
             children: children,
-            cardNumber: cardNumber,
-            expiryDate: expiryDate,
-            cvv: cvv,
+            //cardNumber: cardNumber,
+            //expiryDate: expiryDate,
+            //cvv: cvv,
             eContactName: eContactName,
             eContact: eContact,
         };
