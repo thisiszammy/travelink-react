@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -15,10 +15,10 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-// Initialize Auth
-const auth = getAuth(app);
+const TableTrips = collection(db, 'trips');
 
-export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword };
+
+export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, TableTrips };
