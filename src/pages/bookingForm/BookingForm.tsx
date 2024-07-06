@@ -2,7 +2,8 @@ import React,{ useState } from 'react'
 import bestsummerdestination from '../../res/images/best-summer-destination-1080x567.jpg'
 import './BookingForm.css'
 import { db } from '../../firebaseConfig'
-import { addDoc, collection, doc, setDoc, startAfter } from 'firebase/firestore'
+import { Timestamp, addDoc, collection, doc, setDoc, startAfter } from 'firebase/firestore'
+import Swal from 'sweetalert2'
 
 const BookingForm = () => {
     const [lastName, setlastName] = useState<string>('')
@@ -47,39 +48,27 @@ const BookingForm = () => {
 
         setCvv(input)
     }
+    
+    const handleSubmit = async() => {
 
-    const validateForm = (): boolean => {
-        const newErrors: Record<string, string | null> = {
-            lastName: !lastName ? 'Last name is required' : null,
-            firstName: !firstName ? 'First name is required' : null,
-            email: !email ? 'Email is required' : null,
-            phoneNumber: !phoneNumber ? 'Phone number is required' : null,
-            tripid: !tripid ? 'Trip ID is required' : null,
-            startDate: !startDate ? 'Start date is required' : null,
-            endDate: !endDate ? 'End date is required' : null,
-            cardNumber: !cardNumber ? 'Card number to be used for payment is required' : null,
-            expiryDate: !expiryDate ? 'Card expiry date is missing' : null,
-            cvv: !cvv ? 'CVV is missing' : null,
-        }
-
-        setErrors(newErrors)
-
-        const isValid = !Object.values(newErrors).some(error => error !== null)
-
-        if (!isValid) {
-            console.log("Missing information.")
+        if (!lastName || !firstName || !email || !phoneNumber || !tripid || !startDate || !endDate || !cardNumber || !expiryDate || !cvv){
+            setErrors({
+                lastName: !lastName ? 'Last name is required' : null,
+                firstName: !firstName ? 'First name is required' : null,
+                email: !email ? 'Email is required' : null,
+                phoneNumber: !phoneNumber ? 'Phone number is required' : null,
+                tripid: !tripid ? 'Trip ID is required' : null,
+                startDate: !startDate ? 'Start date is required' : null,
+                endDate: !endDate ? 'End date is required' : null,
+                cardNumber: !cardNumber ? 'Card number to be used for payment is required' : null,
+                expiryDate: !expiryDate ? 'Card expiry date is missing' : null,
+                cvv: !cvv ? 'CVV is missing' : null,
+            })
+            console.log("Missing information.", errors)
             setTimeout(() => {
                 setErrors({})
-            }, 6000)
-        }
-
-        return isValid
-    }
-  
-
-    const handleSubmit = async() => {
-        if (!validateForm()) {
-            return
+            }, 3000)
+            return;
         }
 
         let bookingInformation = {
@@ -95,14 +84,36 @@ const BookingForm = () => {
             children: children,
             eContactName: eContactName,
             eContact: eContact,
+            timestamp: Timestamp.now()
         };
 
         console.log(bookingInformation)
+        console.log(errors)
         try {
             const docRef = await addDoc(collection(db, "bookingReceipts"), bookingInformation);
             await setDoc(doc(db, "bookingReceipts", docRef.id), {docid: docRef.id}, {merge:true})
             console.log("Document successfully uploaded with ID:", docRef.id);
             console.log("Document Successfully uploaded")
+            Swal.fire({
+                title: "Successful!",
+                text: "Your trip has been successfully booked.",
+                icon: "success"
+              });
+            setErrors({})
+            setlastName('');
+            setfirstName('');
+            setEmail('');
+            setPhoneNumber('');
+            //setTripid(''); planning on implementing this after search trip is done implementing. I'm using a default tripid for now for demo purposes
+            setStartDate('');
+            setEndDate('');
+            setCardNumber('');
+            setExpiryDate('');
+            setCvv('');
+            setAdults(1);
+            setChildren(0);
+            setEContactName('');
+            setEContact('');
         } catch (error) {
             console.log(error)
         }
