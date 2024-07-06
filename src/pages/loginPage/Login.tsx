@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebaseConfig';
 import './login-page.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import travelinkLogo from '../../res/images/travelinklogo.png';
-const Login = () => {
+
+const Login: React.FC = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert('User logged in successfully!');
+      navigate('/landing'); 
+    } catch (error: any) {
+      console.error("Error logging in user: ", error);
+      alert('Error logging in user: ' + error.message);
+    }
+  };
 
   const handleFacebookLogin = () => {
     // Implement Facebook login logic here
+    
     alert('Facebook login functionality is not implemented.');
   };
 
@@ -30,18 +49,32 @@ const Login = () => {
           </div>
           <div className="login-form">
             <h2 className="text-center mb-1">Login</h2>
-            <form action="/Customer/Login" method="POST">
+            <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label htmlFor="username">
-                  <i className="fa fa-user"></i> Username
+                <label htmlFor="email">
+                  <i className="fa fa-envelope"></i> Email
                 </label>
-                <input type="text" className="form-control" id="username" name="Username" required />
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
               </div>
               <div className="form-group">
                 <label htmlFor="password">
                   <i className="fa fa-lock"></i> Password
                 </label>
-                <input type="password" className="form-control" id="password" name="Password" required />
+                <input
+                  type="password"
+                  className="form-control"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
               </div>
               <button type="submit" className="btn btn-login btn-block">Link Your Travel</button>
             </form>
@@ -54,9 +87,8 @@ const Login = () => {
               </button>
             </div>
             <p className="register-link mt-4">
-              <label htmlFor="username">Don't have an account?
-                <button onClick={handleRegisterRedirect} className="btn-link"> Join now</button>
-              </label>
+              Don't have an account?
+              <button onClick={handleRegisterRedirect} className="btn-link"> Join now</button>
             </p>
           </div>
         </div>
