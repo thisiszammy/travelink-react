@@ -12,6 +12,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        <Route path='/landing' element={<Landing />} />
         <Route path='/catalog' />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
