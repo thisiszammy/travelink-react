@@ -29,6 +29,7 @@
     "react-router-dom": "^6.24.0",
     "react-scripts": "^5.0.1",
     "react-tailwindcss-datepicker": "^1.6.6",
+    "sweetalert2": "^11.12.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
