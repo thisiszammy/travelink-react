@@ -1,16 +1,5 @@
 /* src/register-page.css */
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background-image: url('../../res/images/waves2.0.jpg'); /* Ensure the path is correct */
-  background-size: cover;
-  background-position: center;
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .main-container {
   width: 100%;
@@ -38,4 +27,15 @@ body {
 
 .btn-register:hover {
   background-color: #ffa07a;
+}
+
+.btn-link {
+  background-color: white;
+  border: none;
+  color: blue;
+}
+
+.form-group{
+  display: block; 
+  text-align: left; 
 }

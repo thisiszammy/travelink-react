@@ -4,6 +4,8 @@ import '@mantine/core/styles.css';
 import Login from './pages/loginPage/Login';
 import Register from './pages/registerPage/Register';
 import Landing from './pages/landingPage/Landing';
+import ForgotPassword from './pages/passwordRecovery/forgotpassword';
+
 
 const App = () => {
   return (
@@ -13,6 +15,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/landing" element={<Landing />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
