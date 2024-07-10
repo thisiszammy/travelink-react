@@ -3,8 +3,8 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background-image: url('../../res/images/waves2.0.jpg'); /* Ensure the path is correct */
+  height: 100vh;
+  background-image: url('../../res/images/cebu3.jpg'); /* Corrected path */
   background-size: cover;
   background-position: center;
   font-family: 'Roboto', sans-serif;
@@ -19,7 +19,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 16%;
 }
 
 .content-container {
@@ -38,7 +37,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
+  padding: 50px;
 }
 
 .left-container {
@@ -50,7 +49,7 @@ body {
   text-align: center;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 50px;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Travel';
 }
 
 .logo-container {
@@ -66,17 +65,58 @@ body {
 
 .login-form {
   width: 100%;
-  text-align: center; /* Center the content */
+  text-align: center; 
+}
+
+.form-group {
+  margin-bottom: 1rem;
 }
 
 .form-group label {
-  display: flex;
-  align-items: center;
-  justify-content: center; /* Center the label */
+  display: block; 
+  margin-bottom: 0.5rem;
 }
+
+.left-container .form-group label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
 
 .form-group label i {
   margin-right: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.password-group {
+  position: relative;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.password-toggle-icon svg {
+  transition: transform 0.3s ease;
+}
+
+.password-toggle-icon:hover svg {
+  transform: scale(1.2);
 }
 
 .btn {
@@ -87,6 +127,7 @@ body {
   transition: background-color 0.3s ease;
   margin: 5px 0; /* Add some margin for spacing */
   width: 100%; /* Make the buttons full width */
+  border-radius: 5px;
 }
 
 .btn-login {
@@ -95,31 +136,54 @@ body {
   font-weight: bold;
 }
 
-.btn-facebook {
-  background-color: #4267B2;
+.btn-google {
+  background-color: #db4437;
   color: white;
 }
 
-.btn-kakao {
-  background-color: #F7E600;
-  color: black;
+.btn-facebook {
+  background-color: #4267B2;
+  color: rgb(255, 255, 255);
+}
+
+.btn-instagram {
+  background-color: #b34e2f;
+  color: rgb(255, 255, 255);
 }
 
 .btn:hover {
   background-color: #ffa07a;
 }
 
-.register-link {
+.btn-google:hover {
+  background-color: #c23321;
+}
+
+.btn-facebook:hover {
+  background-color: #365899;
+}
+
+.btn-instagram:hover {
+  background-color: #c77c26;
+}
+
+.forgot-password, .register-link {
   text-align: center;
 }
 
-.register-link a {
-  color: #ff5733;
+.forgot-password button,
+.register-link button {
+  background: none;
+  color: rgb(56, 56, 235);
+  border: none;
   font-weight: bold;
+  cursor: pointer;
   text-decoration: none;
+  padding: 0;
 }
 
-.register-link a:hover {
+.forgot-password button:hover,
+.register-link button:hover {
   text-decoration: underline;
 }
 
