@@ -1,13 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sendPasswordResetEmail } from 'firebase/auth';
-<<<<<<< HEAD
-import { auth } from '../../firebaseConfig'; // Adjust path as necessary
-=======
 import { auth } from '../../data/firebaseConfig'; // Adjust path as necessary
-import './forgot-password.css'; // Adjust path as necessary
 import 'bootstrap/dist/css/bootstrap.min.css';
->>>>>>> master
 import travelinkLogo from '../../res/images/travelinklogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faArrowLeft } from '@fortawesome/free-solid-svg-icons';

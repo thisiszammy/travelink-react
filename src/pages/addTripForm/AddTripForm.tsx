@@ -7,7 +7,7 @@ import AddActivities from './addActivities/addActivities';
 import { Checkbox } from '@mui/material';
 import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
 import { Timestamp, addDoc, collection, doc, setDoc } from 'firebase/firestore';
-import { db } from '../../firebaseConfig';
+import { db } from '../../data/firebaseConfig';
 import Swal from 'sweetalert2'
 
 
