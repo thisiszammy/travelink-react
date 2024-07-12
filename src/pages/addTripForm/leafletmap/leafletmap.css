@@ -1,0 +1,8 @@
+.custom-icon-container {
+    background-color: transparent; /* Ensure no default background */
+    border: transparent;
+  }
+  
+  .custom-icon {
+    fill: #336488; /* Change to the desired color */
+  }

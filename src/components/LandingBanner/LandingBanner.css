@@ -1,0 +1,14 @@
+.landingbanner-container{
+    width: 100%;
+    height: 700px;
+    background-image: url(../../res/images/landingbanner-background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.landingbanner-container h1{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 4em;
+}

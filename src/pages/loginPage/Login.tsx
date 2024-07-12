@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+<<<<<<< HEAD
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider, sendEmailVerification } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
+=======
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
+import { auth } from '../../data/firebaseConfig';
+import './login-page.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+>>>>>>> master
 import travelinkLogo from '../../res/images/travelinklogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faSignIn, faUnlockAlt, faUserPlus, faPlane, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
