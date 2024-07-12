@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import travelinkLogo from '../../res/images/travelinklogo.png';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { auth, db } from '../../firebaseConfig';
+import { auth, db } from '../../data/firebaseConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlane, faEye, faEyeSlash, faBirthdayCake, faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
