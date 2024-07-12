@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { auth } from '../../firebaseConfig'; // Adjust path as necessary
+import { auth } from '../../data/firebaseConfig'; // Adjust path as necessary
 import './forgot-password.css'; // Adjust path as necessary
 import 'bootstrap/dist/css/bootstrap.min.css';
 import travelinkLogo from '../../res/images/travelinklogo.png';
