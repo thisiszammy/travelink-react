@@ -6,7 +6,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import travelinkLogo from '../../res/images/travelinklogo.png';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
-import { auth, db } from '../../firebaseConfig';
+import { auth, db } from '../../data/firebaseConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlane, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 

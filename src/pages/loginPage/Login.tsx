@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
-import { auth } from '../../firebaseConfig';
+import { auth } from '../../data/firebaseConfig';
 import './login-page.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import travelinkLogo from '../../res/images/travelinklogo.png';

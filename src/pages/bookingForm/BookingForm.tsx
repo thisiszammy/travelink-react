@@ -1,7 +1,7 @@
 import React,{ useState } from 'react'
 import bestsummerdestination from '../../res/images/best-summer-destination-1080x567.jpg'
 import './BookingForm.css'
-import { db } from '../../firebaseConfig'
+import { db } from '../../data/firebaseConfig'
 import { Timestamp, addDoc, collection, doc, setDoc, startAfter } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 
