@@ -7,11 +7,24 @@ import travelinkLogo from '../../res/images/travelinklogo.png';
 import cebuBay from '../../res/images/travel2.jpg'; // Replace with your Cebu Bay image
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers, faHotel, faPlane, faMapSigns } from '@fortawesome/free-solid-svg-icons';
+import { auth } from '../../data/firebaseConfig';
+import LandingHeader from '../../components/LandingHeader/LandingHeader';
+import LandingBanner from '../../components/LandingBanner/LandingBanner';
+
+
 
 const Landing: React.FC = () => {
+  
+  var _user = auth.currentUser;
+
   const navigate = useNavigate();
 
   return (
+    <div className='landingpage-container'>  
+      <LandingHeader user={_user} />
+      <LandingBanner/>
+    </div>
+    /*
     <div className="main-container2">
       <nav className="navbar navbar-expand-lg navbar-light bg-light2">
         <div className="container-fluid2">
@@ -70,6 +83,11 @@ const Landing: React.FC = () => {
         </div>
       </div>
     </div>
+
+    */
+    
+
+
   );
 };
 
