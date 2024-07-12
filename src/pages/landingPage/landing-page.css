@@ -1,5 +1,5 @@
 /* landing-page.css */
-
+/*
 .main-container2 {
   width: 100%;
   display: flex;
@@ -121,3 +121,28 @@
     padding: 20px;
   }
 }
+
+*/
+
+
+.landingpage-container{
+  display: block !important;
+  height:100%;
+  width: 100%;
+  background-image: none;
+}
+
+.landingheader-container{
+  position: absolute;
+  z-index: 5;
+}
+
+.landingbanner-container{
+  position: absolute;
+  top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
