@@ -5,8 +5,14 @@ module.exports = {
     "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
-    extend: {},
+    extend: {
+    colors: {
+      customBlue: '#336488',
+    },
   },
-  plugins: [],
+},
+variants: {
+  extend: {},
+},
+plugins: [],
 }
-
