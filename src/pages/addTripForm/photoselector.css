@@ -1,0 +1,25 @@
+/* Hide scrollbar buttons and thumb, show only track */
+.invisiblescrollbar::-webkit-scrollbar {
+    width: 8px; /* Adjust width as needed */
+    height: 10px;
+}
+
+.invisiblescrollbar::-webkit-scrollbar-button {
+    display: none; /* Hide scrollbar buttons (arrows) */
+}
+
+.invisiblescrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1); /* Optional: Customize track color */
+    border-radius: 10px; /* Optional: Round corners of the track */
+    margin: 5px;
+}
+
+.invisiblescrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.5); /* Optional: Customize track color */
+    border-radius: 10px; /* Optional: Round corners of the track */
+    margin: 5px;
+}
+
+.invisiblescrollbar::-webkit-scrollbar-track {
+    display: none;
+}
