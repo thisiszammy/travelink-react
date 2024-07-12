@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import './photoselector.css'
 import AddIcon from '@mui/icons-material/Add';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
-import { storage } from '../../firebaseConfig';
+import { storage } from '../../data/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 
 
