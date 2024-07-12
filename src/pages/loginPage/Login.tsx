@@ -1,43 +1,67 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider } from 'firebase/auth';
 import { auth } from '../../firebaseConfig';
 import './login-page.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'font-awesome/css/font-awesome.min.css';
 import travelinkLogo from '../../res/images/travelinklogo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faLock, faSignIn, faUnlockAlt, faUserPlus, faPlane, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handlePasswordToggle = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert('User logged in successfully!');
-      navigate('/landing'); 
+      navigate('/landing');
     } catch (error: any) {
       console.error("Error logging in user: ", error);
       alert('Error logging in user: ' + error.message);
     }
   };
 
-  const handleFacebookLogin = () => {
-    // Implement Facebook login logic here
-    
-    alert('Facebook login functionality is not implemented.');
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      alert('User logged in with Google!');
+      navigate('/landing');
+    } catch (error: any) {
+      console.error("Error logging in with Google: ", error);
+      alert('Error logging in with Google: ' + error.message);
+    }
   };
 
-  const handleKakaoLogin = () => {
-    // Implement Kakao login logic here
-    alert('Kakao login functionality is not implemented.');
+  const handleFacebookLogin = async () => {
+    const provider = new FacebookAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      alert('User logged in with Facebook!');
+      navigate('/landing');
+    } catch (error: any) {
+      console.error("Error logging in with Facebook: ", error);
+      alert('Error logging in with Facebook: ' + error.message);
+    }
   };
 
   const handleRegisterRedirect = () => {
     navigate('/register');
+  };
+
+  const handleForgotPassword = () => {
+    navigate('/forgotpassword');
   };
 
   return (
@@ -49,10 +73,11 @@ const Login: React.FC = () => {
           </div>
           <div className="login-form">
             <h2 className="text-center mb-1">Login</h2>
+            <p className="text-center">Access your Travelink account</p>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="email">
-                  <i className="fa fa-envelope"></i> Email
+                  <FontAwesomeIcon icon={faEnvelope} /> Email
                 </label>
                 <input
                   type="email"
@@ -61,40 +86,56 @@ const Login: React.FC = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  placeholder="Enter your email"
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group password-group">
                 <label htmlFor="password">
-                  <i className="fa fa-lock"></i> Password
+                  <FontAwesomeIcon icon={faLock} /> Password
                 </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div className="password-container">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    className="form-control"
+                    id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    placeholder="Enter your password"
+                  />
+                  <span className="password-toggle-icon" onClick={handlePasswordToggle}>
+                    <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  </span>
+                </div>
               </div>
-              <button type="submit" className="btn btn-login btn-block">Link Your Travel</button>
+              <button type="submit" className="btn btn-login btn-block">
+                <FontAwesomeIcon icon={faSignIn} /> Link Your Travel
+              </button>
             </form>
             <div className="social-login text-center mt-4">
-              <button className="btn btn-facebook" onClick={handleFacebookLogin}>
-                <i className="fab fa-facebook-f"></i> Login with Facebook
+              <button className="btn btn-google" onClick={handleGoogleLogin}>
+                <FontAwesomeIcon icon={faGoogle} /> Sign in with Gmail
               </button>
-              <button className="btn btn-kakao" onClick={handleKakaoLogin}>
-                <i className="fas fa-sun"></i> Login with Sunny KakaoTalk
+              <button className="btn btn-facebook" onClick={handleFacebookLogin}>
+                <FontAwesomeIcon icon={faFacebook} /> Login with Facebook
               </button>
             </div>
+            <p className="forgot-password mt-3">
+              <button onClick={handleForgotPassword} className="btn-link">
+                <FontAwesomeIcon icon={faUnlockAlt} /> Forgot Password?
+              </button>
+            </p>
             <p className="register-link mt-4">
               Don't have an account?
-              <button onClick={handleRegisterRedirect} className="btn-link"> Join now</button>
+              <button onClick={handleRegisterRedirect} className="btn-link">
+                <FontAwesomeIcon icon={faUserPlus} /> Join now
+              </button>
             </p>
           </div>
         </div>
         <div className="right-container">
-          <h1>Welcome to Travelink</h1>
-          <p>Your adventure begins here. Explore the world with us!</p>
+          <p>Your adventure begins here. Explore CEBU with us!</p>
+          <FontAwesomeIcon icon={faPlane} size="3x" />
         </div>
       </div>
     </div>
