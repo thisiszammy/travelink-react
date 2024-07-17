@@ -86,7 +86,7 @@ const AddActivities: React.FC<AddActivitiesProps> = ({ActivityObject, setActivit
         if (activityToRemove.storagePath) {
             const storageRef = ref(storage, activityToRemove.storagePath);
             try {
-                await deleteObject(storageRef);
+                //await deleteObject(storageRef);
             } catch (error) {
                 console.error('Error deleting file from storage:', error);
             }
