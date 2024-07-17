@@ -29,9 +29,9 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 
-const TableTrips = collection(db, 'trips');
+const TableTrips = collection(db, 'destinations');
 
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, googleProvider, facebookProvider, TableTrips, storage };
+export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, googleProvider, facebookProvider, TableTrips, storage, getDocs };

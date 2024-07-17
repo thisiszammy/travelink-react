@@ -10,6 +10,8 @@ import { MantineProvider } from '@mantine/core';
 import AddTripForm from './pages/addTripForm/AddTripForm';
 import Landing from './pages/landingPage/Landing';
 import BookingForm from './pages/bookingForm/BookingForm';
+import SearchTrip from './pages/searchtripPage/SearchTrip';
+import AboutUsContactUs from './pages/about&contactusPage/About&ContactUs';
 
 
 const App = () => {
@@ -23,6 +25,8 @@ const App = () => {
         <Route path="/forgotpassword" element={<ForgotPassword />} />
         <Route path="/bookingform" element={<BookingForm />} />
         <Route path="/addtripform" element={<AddTripForm />} />
+        <Route path='/searchtrip' element={<SearchTrip />} /> 
+        <Route path='/aboutuscontactus' element={<AboutUsContactUs />} />
         <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
