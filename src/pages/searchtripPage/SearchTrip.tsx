@@ -4,6 +4,10 @@ import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { TableTrips, getDocs } from '../../data/firebaseConfig';
+import { useDisclosure } from '@mantine/hooks';
+import { Modal, Button } from '@mantine/core';
+import BookingForm from '../bookingForm/BookingForm';
+
 
 interface Trip {
   id: string;
@@ -13,7 +17,7 @@ interface Trip {
   Inclusions: string[];
   FeaturedPhotos: { downloadUrl: string }[];
   Description: string;
-  Activities: { caption: string }[];
+  Activities: { caption: string, downloadUrl: string }[];
 }
 
 const SearchTrip: React.FC = () => {
@@ -22,6 +26,7 @@ const SearchTrip: React.FC = () => {
   const [filteredResults, setFilteredResults] = useState<Trip[]>([]);
   const [trips, setTrips] = useState<Trip[]>([]);
   const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null);
+  const [opened, { open, close }] = useDisclosure(false);
 
   useEffect(() => {
     const fetchTrips = async () => {
@@ -74,10 +79,15 @@ const SearchTrip: React.FC = () => {
             <h2 className="font-semibold text-xl mb-2">About</h2>
             <p>{selectedTrip.Description}</p>
             <h2 className="font-semibold text-xl mt-4 mb-2">Things to do in {selectedTrip.DestinationName}</h2>
-            <div className="activities">
+            <div className="activities grid grid-cols-2">
               {selectedTrip.Activities.length > 0 ? (
                 selectedTrip.Activities.map((activity, index) => (
-                  <div key={index} className="activity-card">{activity.caption}</div>
+                  <div className='w-full h-full'>
+                    <img src={activity.downloadUrl}
+                        alt={`activity preview ${index}`}
+                        className='hover:scale-125 ease-in-out duration-300 w-full h-[250px] object-cover rounded-tl-[8px] rounded-tr-[8px]'/>
+                    <div key={index} className="activity-card h-[100px] flex justify-center items-center">{activity.caption}</div>
+                  </div>
                 ))
               ) : (
                 <p>No activities available.</p>
@@ -100,30 +110,36 @@ const SearchTrip: React.FC = () => {
       case 'Price':
         console.log('Selected trip inclusions:', selectedTrip.Inclusions); // Debugging log
         return (
-          <motion.div className="tab-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-            <h2 className="font-semibold text-xl mb-2">Inclusions</h2>
-            <ul className="list-disc ml-5">
-              {selectedTrip.Inclusions.length > 0 ? (
-                selectedTrip.Inclusions.map((amenity, index) => (
-                  <li key={index}>{amenity}</li>
-                ))
-              ) : (
-                <li>No inclusions available.</li>
-              )}
-            </ul>
-            <h2 className="font-semibold text-xl mt-4 mb-2">Accepted Payment Channels</h2>
-            <div className="payment-channels flex space-x-4">
-              <img src={require('../../res/images/visa.png')} alt="VISA" className="payment-icon" />
-              <img src={require('../../res/images/mastercard.png')} alt="MasterCard" className="payment-icon" />
-              <img src={require('../../res/images/paypal.png')} alt="PayPal" className="payment-icon" />
-              <img src={require('../../res/images/gcash.jpg')} alt="GCash" className="payment-icon" />
+          <motion.div className="flex tab-content" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <div className='flex-1'>
+              <h2 className="font-semibold text-xl mb-2">Inclusions</h2>
+              <ul className="list-disc flex-col items-start">
+                {selectedTrip.Inclusions.length > 0 ? (
+                  selectedTrip.Inclusions.map((amenity, index) => (
+                    <li key={index}>{amenity}</li>
+                  ))
+                ) : (
+                  <li>No inclusions available.</li>
+                )}
+              </ul>
             </div>
-            <button
-              className="book-now mt-4 p-2 bg-blue-500 text-white rounded"
-              onClick={() => Swal.fire('Booking Confirmed!', 'Thank you for booking with us.', 'success')}
-            >
-              Book now!
-            </button>
+            <div className='flex-col justify-end'>
+              <h2 className="font-semibold text-xl mb-2">Accepted Payment Channels</h2>
+              <div className="payment-channels flex w-full justify-end">
+                <img src={require('../../res/images/visa.png')} alt="VISA" title='VISA' className="payment-icon" />
+                <img src={require('../../res/images/mastercard.png')} alt="MasterCard" title='MasterCard' className="payment-icon" />
+                <img src={require('../../res/images/paypal.png')} alt="PayPal" title='PayPal' className="payment-icon" />
+                <img src={require('../../res/images/gcash.jpg')} alt="GCash" title='GCash' className="payment-icon" />
+              </div>
+              <div className='flex justify-end'>
+                <button
+                  className="book-now mt-4 py-2 px-4 bg-blue-500 text-white font-semibold rounded"
+                  onClick={open}
+                >
+                  Book now!
+                </button>
+              </div>
+            </div>
           </motion.div>
         );
       default:
@@ -133,6 +149,9 @@ const SearchTrip: React.FC = () => {
 
   return (
     <div className="search-trip-page container mx-auto p-4">
+      <Modal opened={opened} onClose={close} title="Booking Form" size='100%'>
+        <BookingForm id={selectedTrip?.id || "Error getting back Trip ID"} DestinationName={selectedTrip?.DestinationName || "Error getting back destination name"}/>
+      </Modal>
       <header className="header flex justify-between items-center p-4 bg-blue-800 text-white">
         <h1 className="text-3xl font-bold">TraveLink</h1>
         <div className="icons flex space-x-4">
