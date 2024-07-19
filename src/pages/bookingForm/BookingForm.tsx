@@ -5,12 +5,18 @@ import { db } from '../../data/firebaseConfig'
 import { Timestamp, addDoc, collection, doc, setDoc, startAfter } from 'firebase/firestore'
 import Swal from 'sweetalert2'
 
-const BookingForm = () => {
+interface BookingFormProps {
+    id: string
+    DestinationName: string;
+}
+
+const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName}) => {
     const [lastName, setlastName] = useState<string>('')
     const [firstName, setfirstName] = useState<string>('')
     const [email, setEmail] = useState<string>('sampleuseremail@email.com')
     const [phoneNumber, setPhoneNumber] = useState<string>('')
-    const [tripid, setTripid] = useState<string>('thisisasampleid123')
+    const [tripid, setTripid] = useState<string>(id)
+    const [destinationName, setDestinationName] = useState<string>(DestinationName)
     const [startDate, setStartDate] = useState<string>(new Date().toISOString().split('T')[0]);
     const [endDate, setEndDate] = useState<string>();
     const [adults, setAdults] = useState<number>(1);
@@ -121,10 +127,10 @@ const BookingForm = () => {
     
 
   return (
-    <div className='flex items-center justify-center w-screen h-screen bookingform whitespace-nowrap poppins-regular'>
-      <div className='w-[80%] h-[80%] flex'>
+    <div className='flex items-center justify-center w-full h-full bookingform whitespace-nowrap poppins-regular'>
+      <div className='w-full h-full flex'>
 
-        <div className='hide-scrollbar bg-white w-2/3 h-full p-4 rounded-tl-[20px] rounded-bl-[20px] overflow-y-auto overflow-x-hidden transition-all'>
+        <div className='hide-scrollbar bg-gray-200 w-2/3 h-full p-4 rounded-tl-[20px] rounded-bl-[20px] overflow-y-auto overflow-x-hidden transition-all'>
             <h4>Personal Information</h4>
             <div className='flex flex-col'>
                 <div className='ml-10 flex items-center'>
@@ -181,7 +187,7 @@ const BookingForm = () => {
                     <label className="block">Trip Selection</label>
                     <input
                     type='text'
-                    value={tripid}
+                    value={destinationName}
                     onChange={(e)=>setTripid(e.target.value)}
                     className={`${errors['tripid'] ? 'border-rose-600' : 'border-gray-300'} w-full mt-1 p-2 border-2 rounded-[10px]`}
                     disabled
@@ -297,17 +303,17 @@ const BookingForm = () => {
                 >
                     Book Now!
                 </button>
-                <button
+                {/*<button
                     className='bg-[#9AA5AC] ml-4 py-3 px-4 text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
                     //onClick={handleSubmit}
                 >
                     Cancel
-                </button>
+                </button>*/}
             </div>
         </div>
 
         <div
-            className='w-full h-full text-white rounded-tr-[20px] rounded-br-[20px]'
+            className='w-full h-auto text-white rounded-tr-[20px] rounded-br-[20px]'
             style={{
                 backgroundImage: `url(${bestsummerdestination})`,
                 backgroundSize: 'cover',
