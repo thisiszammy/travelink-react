@@ -86,7 +86,7 @@ const AddActivities: React.FC<AddActivitiesProps> = ({ActivityObject, setActivit
         if (activityToRemove.storagePath) {
             const storageRef = ref(storage, activityToRemove.storagePath);
             try {
-                await deleteObject(storageRef);
+                //await deleteObject(storageRef);
             } catch (error) {
                 console.error('Error deleting file from storage:', error);
             }
@@ -138,7 +138,8 @@ const AddActivities: React.FC<AddActivitiesProps> = ({ActivityObject, setActivit
                                     alt={`activity preview ${index}`}
                                     className='w-full h-full object-cover rounded-[20px]'
                                 />
-                                <div className='absolute bottom-0 left-0 w-full flex justify-center text-center bg-black bg-opacity-50 text-white p-2 rounded-b-[20px] whitespace-normal overflow-hidden'>
+                                <div
+                                className='absolute bottom-0 left-0 w-full flex justify-center text-center bg-black bg-opacity-50 text-white p-2 rounded-b-[20px] whitespace-normal overflow-hidden'>
                                     {activity.caption}
                                 </div>
                                 <button

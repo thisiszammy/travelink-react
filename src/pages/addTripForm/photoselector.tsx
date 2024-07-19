@@ -76,7 +76,7 @@ const PhotoSelector: React.FC<PhotoSelectorProps> = ({files, setFiles}) => {
         if (fileToRemove.storagePath) {
             const storageRef = ref(storage, fileToRemove.storagePath);
             try {
-                await deleteObject(storageRef);
+                //await deleteObject(storageRef);
             } catch (error) {
                 console.error('Error deleting file from storage:', error);
             }
