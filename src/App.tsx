@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '@mantine/core/styles.css';
 import Login from './pages/loginPage/Login';
 import Register from './pages/registerPage/Register';
@@ -14,11 +14,21 @@ import SearchTrip from './pages/searchtripPage/SearchTrip';
 import AboutUsContactUs from './pages/about&contactusPage/About&ContactUs';
 import UpdateDeleteForm from './pages/UpdateDeleteForm/UpdateDeleteForm';
 
+import NavigationBar from './components/NavigationBar';
+import Account from './pages/profilePage/Account';
+import Booking from './pages/profilePage/Booking';
+import TopBar from './components/TopBar';
+import Drawer from './components/Drawer';
+import './App.css';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Router>
+      <NavigationBar />
+      <TopBar />
       <Routes>
+        <Route path="/account" element={<Account />} />
+        <Route path="/booking" element={<Booking />} />
         <Route path='/landing' element={<Landing />} />
         <Route path='/catalog' />
         <Route path="/register" element={<Register />} />
@@ -29,7 +39,6 @@ const App = () => {
         <Route path='/searchtrip' element={<SearchTrip />} /> 
         <Route path='/aboutuscontactus' element={<AboutUsContactUs />} />
         <Route path="/updatedeleteform" element={<UpdateDeleteForm />} />
-        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );

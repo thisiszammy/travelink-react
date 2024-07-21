@@ -1,0 +1,18 @@
+/* src/pages/profilePage/Account.css */
+.booking-page {
+    display: flex;
+    /*margin-left: 100px; /* Adjust based on the width of NavigationBar */
+    z-index: 1;
+  }
+  
+  .booking-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 250px; /* Width of open drawer */
+    transition: margin-left 0.3s ease; /* Smooth transition for content adjustment */
+  }
+  
+  .drawer.closed ~ .account-content {
+    margin-left: 0; /* No extra margin when drawer is closed */
+  }
+  

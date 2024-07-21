@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+/* src/App.css  topbar */
+.app {
+  position: relative; /* Ensure relative positioning for children */
+  display: flex;
+  height: 100vh;
+}
+
+.content {
+margin-top: 20px;
+  padding: 25px;
+}
+
+.app-container {
+  display: flex;
+}
+
+.main-content {
+  flex-grow: 1;
+  margin-left: 100px; /* Adjust based on the width of NavigationBar */
+  margin-top: 50px; /* Adjust based on the height of TopBar */
+  padding: 20px;
+  transition: margin-left 0.3s;
+}
+
+.drawer.open ~ .main-content {
+  margin-left: 350px; /* Adjust based on the width of the open drawer */
+}
