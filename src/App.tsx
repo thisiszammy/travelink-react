@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import '@mantine/core/styles.css';
 import Login from './pages/loginPage/Login';
 import Register from './pages/registerPage/Register';
@@ -24,21 +24,19 @@ import './App.css';
 const App: React.FC = () => {
   return (
     <Router>
-      <NavigationBar />
-      <TopBar />
       <Routes>
         <Route path="/account" element={<Account />} />
         <Route path="/booking" element={<Booking />} />
         <Route path='/landing' element={<Landing />} />
-        <Route path='/catalog' />
+        <Route path='/catalog' element={<CatalogPage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotpassword" element={<ForgotPassword />} />
-        {/*<Route path="/bookingform" element={<BookingForm />} />*/}
         <Route path="/addtripform" element={<AddTripForm />} />
         <Route path='/searchtrip' element={<SearchTrip />} /> 
         <Route path='/aboutuscontactus' element={<AboutUsContactUs />} />
         <Route path="/updatedeleteform" element={<UpdateDeleteForm />} />
+        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );
