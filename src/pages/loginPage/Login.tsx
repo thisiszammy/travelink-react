@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, FacebookAuthProvider,sendEmailVerification } from 'firebase/auth';
-import { auth } from '../../data/firebaseConfig';
+import { auth, db } from '../../data/firebaseConfig';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import travelinkLogo from '../../res/images/travelinklogo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,6 +9,7 @@ import { faEnvelope, faLock, faSignIn, faUnlockAlt, faUserPlus, faPlane, faEye, 
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import { doc, getDoc } from '@firebase/firestore';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ const Login: React.FC = () => {
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
   };
-
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
