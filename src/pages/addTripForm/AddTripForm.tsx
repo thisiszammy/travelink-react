@@ -9,6 +9,7 @@ import ErrorRoundedIcon from '@mui/icons-material/ErrorRounded';
 import { Timestamp, addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../data/firebaseConfig';
 import Swal from 'sweetalert2'
+import { useAuth } from '../../utils/AuthContext';
 
 
 interface LatLng {
@@ -33,6 +34,7 @@ const formatNumberWithCommas = (value: string) => {
 
 
 const AddTripForm = () => {
+  const {user, userData, loading} = useAuth()
   const [destinationname, setDestinationName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
   const [featuredPhotos, setFeaturedPhotos] = useState<FileWithMetadata[]>([])
@@ -105,10 +107,11 @@ const AddTripForm = () => {
         //Lng: latLng.lng,
         LocationName: '',
         Region: '',
-      },
+      }, 
       Inclusions: inclusions,
       Price: price,
-      DateAdded: Timestamp.now()
+      DateAdded: Timestamp.now(),
+      owner: user?.uid,
     }
     console.log(destinationInformation)
 
@@ -134,7 +137,10 @@ const AddTripForm = () => {
         console.log(error)
     }
   }
-  
+  console.log(user, userData)
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className='flex w-screen h-screen justify-center items-center addtripform whitespace-nowrap'>
       <div className='flex w-[70vw] h-auto'>
