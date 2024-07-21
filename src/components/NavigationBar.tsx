@@ -1,7 +1,7 @@
 // src/components/NavigationBar.tsx
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBook } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBook, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import './NavigationBar.css';
 
@@ -23,6 +23,15 @@ const NavigationBar: React.FC = () => {
         <div className="nav-icon">
           <FontAwesomeIcon icon={faUser} />
           <span>Account</span>
+        </div>
+      </button>
+      <button
+        className={`nav-button ${activeButton === '/account' ? 'active' : ''}`}
+        onClick={() => handleClick('/searchtrip')}
+      >
+        <div className="nav-icon">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <span>Search</span>
         </div>
       </button>
       <button
