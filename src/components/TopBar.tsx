@@ -32,7 +32,6 @@ const TopBar: React.FC = () => {
     }
     handleMenuClose();
   };
-  console.log('UserData in TopBar:', user);
   return (
     <div className="top-bar">
       <span className="logo">Travelink</span>
