@@ -29,13 +29,12 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       setLoading(true);
       if (user) {
         try {
-          // Fetch additional user data
           const userDoc = doc(db, "users", user.uid);
           const docSnap = await getDoc(userDoc);
           if (docSnap.exists()) {
             const data = docSnap.data() as UserData;
             setUserData(data);
-            console.log('User data:', data);  // Log user data to the console
+            console.log('User data:', data);
           } else {
             console.log('No user data found');
           }

@@ -10,8 +10,10 @@ const Booking: React.FC = () => {
     <div className="app-container">
       <NavigationBar/>
       <TopBar/>
-      <h1>Booking Page</h1>
-      <p>This is the Booking page content.</p>
+      <div className='ml-[100px] mt-[50px] p-4'>
+        <h1>Booking Page</h1>
+        <p>This is the Booking page content.</p>
+      </div>
     </div>
   );
 };

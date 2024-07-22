@@ -10,6 +10,8 @@ import { faUsers, faHotel, faPlane, faMapSigns } from '@fortawesome/free-solid-s
 import { auth } from '../../data/firebaseConfig';
 import LandingHeader from '../../components/LandingHeader/LandingHeader';
 import LandingBanner from '../../components/LandingBanner/LandingBanner';
+import NavigationBar from '../../components/NavigationBar';
+import TopBar from '../../components/TopBar';
 
 
 
@@ -20,9 +22,13 @@ const Landing: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='landingpage-container'>  
-      <LandingHeader user={_user} />
-      <LandingBanner/>
+    <div className='flex'>
+      <NavigationBar/>
+      <TopBar/>
+      <div className='landingpage-container'>  
+        {/*<LandingHeader user={_user} />*/}
+        <LandingBanner/>
+      </div>
     </div>
     /*
     <div className="main-container2">
