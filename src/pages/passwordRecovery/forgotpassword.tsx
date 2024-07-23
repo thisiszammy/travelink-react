@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import cebuBay from '../../res/images/travel.jpg';
 
 const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const ForgotPassword: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
+    try { 
       await sendPasswordResetEmail(auth, email);
       Swal.fire({
         icon: 'success',
@@ -48,7 +49,7 @@ const ForgotPassword: React.FC = () => {
   return (
     <motion.div
       className="relative flex items-center justify-center h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url('../../res/images/cebu3.jpg')` }}
+      style={{ backgroundImage: `url(${cebuBay})` }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

@@ -9,6 +9,7 @@ import { faEnvelope, faLock, faSignIn, faUnlockAlt, faUserPlus, faPlane, faEye, 
 import { faGoogle, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import Swal from 'sweetalert2';
 import { motion } from 'framer-motion';
+import cebuBay from '../../res/images/cebu3.jpg';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
@@ -170,7 +171,7 @@ const Login: React.FC = () => {
   return (
     <motion.div
       className="relative flex items-center justify-center h-screen bg-cover bg-center"
-      style={{ backgroundImage: `url('../../res/images/cebu3.jpg')` }}
+     style={{ backgroundImage: `url(${cebuBay})` }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
