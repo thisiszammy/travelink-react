@@ -4,16 +4,19 @@ import './BookingForm.css'
 import { db } from '../../data/firebaseConfig'
 import { Timestamp, addDoc, collection, doc, setDoc, startAfter } from 'firebase/firestore'
 import Swal from 'sweetalert2'
+import { useAuth } from '../../utils/AuthContext'
 
 interface BookingFormProps {
     id: string
     DestinationName: string;
+    close: () => void
 }
 
-const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName}) => {
+const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName, close}) => {
+    const {user, userData, loading} = useAuth()
     const [lastName, setlastName] = useState<string>('')
     const [firstName, setfirstName] = useState<string>('')
-    const [email, setEmail] = useState<string>('sampleuseremail@email.com')
+    const [email, setEmail] = useState<string>(user?.email || '')
     const [phoneNumber, setPhoneNumber] = useState<string>('')
     const [tripid, setTripid] = useState<string>(id)
     const [destinationName, setDestinationName] = useState<string>(DestinationName)
@@ -78,7 +81,7 @@ const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName}) => {
         }
 
         let bookingInformation = {
-            docid: '',
+            bookedby: user?.uid,
             lastname: lastName,
             firstname: firstName,
             email: email,
@@ -90,7 +93,8 @@ const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName}) => {
             children: children,
             eContactName: eContactName,
             eContact: eContact,
-            timestamp: Timestamp.now()
+            timestamp: Timestamp.now(),
+            
         };
 
         console.log(bookingInformation)
@@ -120,6 +124,7 @@ const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName}) => {
             setChildren(0);
             setEContactName('');
             setEContact('');
+            close()
         } catch (error) {
             console.log(error)
         }
