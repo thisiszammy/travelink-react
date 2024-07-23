@@ -155,7 +155,10 @@ const SearchTrip: React.FC = () => {
       <TopBar/>
       <div className="ml-[100px] mt-[50px]">
         <Modal opened={opened} onClose={close} title="Booking Form" size='100%'>
-          <BookingForm id={selectedTrip?.id || "Error getting back Trip ID"} DestinationName={selectedTrip?.DestinationName || "Error getting back destination name"}/>
+          <BookingForm
+          id={selectedTrip?.id || "Error getting back Trip ID"} 
+          DestinationName={selectedTrip?.DestinationName || "Error getting back destination name"}
+          close={close}/>
         </Modal>
         <main className="main flex mt-4">
           <aside className="sidebar relative w-1/3 p-4 m-4 bg-blue-100 h-screen">
