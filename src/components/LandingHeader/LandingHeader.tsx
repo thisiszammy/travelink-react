@@ -2,6 +2,8 @@ import { User } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGripLinesVertical, faCircleUser, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import './LandingHeader.css';
+import NavigationBar from '../NavigationBar';
+import TopBar from '../TopBar';
 
 
 function HeaderButtons(){
@@ -29,7 +31,7 @@ export default function LandingHeader({user} : {user:User|null}){
                         </li>
                     </ul>
                 </div>
-            </div>  
+            </div>
         );
         
     }else{

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import travelinkLogo from '../../res/images/travelinklogo.png';
 import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
-import { collection, addDoc } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../../data/firebaseConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlane, faEye, faEyeSlash, faBirthdayCake, faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
@@ -39,8 +39,8 @@ const Register: React.FC = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      await addDoc(collection(db, "users"), {
-        uid: user.uid,
+      // Use setDoc to create or update the document with the UID as the document ID
+      await setDoc(doc(db, "users", user.uid), {
         username: username,
         email: email,
         birthday: birthday,

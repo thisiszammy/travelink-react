@@ -13,25 +13,35 @@ import BookingForm from './pages/bookingForm/BookingForm';
 import SearchTrip from './pages/searchtripPage/SearchTrip';
 import AboutUsContactUs from './pages/about&contactusPage/About&ContactUs';
 import UpdateDeleteForm from './pages/UpdateDeleteForm/UpdateDeleteForm';
+import { AuthProvider } from './utils/AuthContext';
+import ProtectedRoute from './utils/ProtectedRoute';
+import NavigationBar from './components/NavigationBar';
+import Account from './pages/profilePage/Account';
+import Booking from './pages/profilePage/Booking';
+import TopBar from './components/TopBar';
+import Drawer from './components/Drawer';
+import './App.css';
 
-
-const App = () => {
+const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path='/landing' element={<Landing />} />
-        <Route path='/catalog' />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        {/*<Route path="/bookingform" element={<BookingForm />} />*/}
-        <Route path="/addtripform" element={<AddTripForm />} />
-        <Route path='/searchtrip' element={<SearchTrip />} /> 
-        <Route path='/aboutuscontactus' element={<AboutUsContactUs />} />
-        <Route path="/updatedeleteform" element={<UpdateDeleteForm />} />
-        <Route path="/" element={<Navigate to="/login" />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/account" element={<ProtectedRoute element={<Account />} />} />
+          <Route path="/booking" element={<ProtectedRoute element={<Booking />} />} />
+          <Route path='/landing' element={<ProtectedRoute element={<Landing />} />} />
+          <Route path='/catalog' element={<ProtectedRoute element={<CatalogPage />} />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/addtripform" element={<ProtectedRoute element={<AddTripForm />} />} />
+          <Route path='/searchtrip' element={<ProtectedRoute element={<SearchTrip />} />} /> 
+          <Route path='/aboutuscontactus' element={<AboutUsContactUs />} />
+          <Route path="/updatedeleteform" element={<ProtectedRoute element={<UpdateDeleteForm />} />} />
+          <Route path="/" element={<Navigate to="/login" />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 
