@@ -1,29 +1,16 @@
-// src/pages/profilePage/Booking.tsx
 import React, { useEffect, useState } from 'react';
 import Drawer from '../../components/Drawer';
 import './Booking.css';
 import NavigationBar from '../../components/NavigationBar';
 import TopBar from '../../components/TopBar';
 import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
 import { useAuth } from '../../utils/AuthContext';
-import { Timestamp, collection, doc, onSnapshot, query, where } from 'firebase/firestore';
+import { Timestamp, collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../../data/firebaseConfig';
-
-interface Column {
-  id: string;
-  label: string;
-  minWidth?: number;
-  maxWidth?: number;
-  align?: 'right' | 'left' | 'center';
-  format?: (value: any) => string;
-}
+import { DataGrid, GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 const formatDate = (timestamp: Timestamp): string => {
   const date = timestamp.toDate();
@@ -36,14 +23,46 @@ const formatDate = (timestamp: Timestamp): string => {
   return `${month}/${day}/${year} ${hours}:${minutes}:${seconds}`;
 };
 
-const columns: readonly Column[] = [
-  { id: 'tripid', label: 'Trip ID', minWidth: 170 },
-  { id: 'startDate', label: 'Start Date', minWidth: 100 },
-  { id: 'endDate', label: 'End Date', minWidth: 100 },
-  { id: 'timestamp', label: 'Booked On', minWidth: 100, format: formatDate },
-  { id: 'view', label: '', minWidth: 100, },
-  { id: 'edit', label: '', minWidth: 100 },
-  { id: 'delete', label: '', minWidth: 100 },
+const columns: GridColDef[] = [
+  { field: 'tripName', headerName: 'Trip Name', headerAlign: 'center', flex: 1, align: 'center' },
+  { field: 'startDate', headerName: 'Start Date', headerAlign: 'center', width: 150, align: 'center' },
+  { field: 'endDate', headerName: 'End Date', headerAlign: 'center', width: 150, align: 'center' },
+  {
+    field: 'timestamp',
+    headerName: 'Booked On',
+    headerAlign: 'center',
+    flex: 1,
+    valueFormatter: (value?: Timestamp) => {
+      if (value == null) {
+        return '';
+      }
+      return `${formatDate(value)}`;
+    },
+  },
+  {
+    field: 'view',
+    headerName: 'View',
+    width: 100,
+    renderCell: (params: GridRenderCellParams<any>) => (
+      <RemoveRedEyeIcon fontSize='large' className='text-[#002B4A] cursor-pointer'/>
+    ),
+  },
+  {
+    field: 'edit',
+    headerName: 'Edit',
+    width: 100,
+    renderCell: (params: GridRenderCellParams<any>) => (
+      <EditIcon fontSize='large' className='text-[#336488] cursor-pointer'/>
+    ),
+  },
+  {
+    field: 'delete',
+    headerName: 'Delete',
+    width: 100,
+    renderCell: (params: GridRenderCellParams<any>) => (
+      <DeleteForeverIcon fontSize='large' className='text-rose-600 cursor-pointer'/>
+    ),
+  },
 ];
 
 interface BookingReceipt {
@@ -63,92 +82,99 @@ interface BookingReceipt {
   tripid: string
 }
 
-const Booking: React.FC = () => {
-  const {user, userData, loading} = useAuth()
-  const [bookings, setBookings] = useState<BookingReceipt[]>([])
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
+interface Activity {
+  caption: string;
+  downloadUrl: string;
+  storagePath: string;
+}
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+interface FeaturedPhoto {
+  downloadUrl: string;
+  storagePath: string;
+}
+
+interface Location {
+  Lat: number;
+  Lng: number;
+  LocationName: string;
+  Region: string;
+}
+
+interface Destination {
+  docid: string;
+  DestinationName: string;
+  Description: string;
+  DateAdded: Date;
+  Price: string;
+  owner: string;
+  location: Location;
+  Activities: Activity[];
+  FeaturedPhotos: FeaturedPhoto[];
+  Inclusions: string[];
+}
+
+const getDestinationNameByDocId = (docid: string, destinations: Destination[]): string | undefined => {
+  const destination = destinations.find(dest => dest.docid === docid);
+  return destination?.DestinationName;
+};
+
+const Booking: React.FC = () => {
+  const { user } = useAuth();
+  const [bookings, setBookings] = useState<BookingReceipt[]>([]);
+  const [destinations, setDestinations] = useState<Destination[]>([])
+  const [pageSize, setPageSize] = useState<number>(10);
 
   useEffect(() => {
     if (!user) return;
 
-    const q = query(collection(db, "bookingReceipts"), where("bookedby", "==", user?.uid))
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const bookings: BookingReceipt[] = []
+    const bookingsquery = query(collection(db, "bookingReceipts"), where("bookedby", "==", user?.uid));
+    const unsubscribeBookings = onSnapshot(bookingsquery, (querySnapshot) => {
+      const bookings: BookingReceipt[] = [];
       querySnapshot.forEach((doc) => {
-        bookings.push(doc.data() as BookingReceipt)
-      })
-      setBookings(bookings)
-      console.log(bookings)
-    })
-    return () => unsubscribe();
-  }, [user])
+        bookings.push(doc.data() as BookingReceipt);
+      });
+      setBookings(bookings);
+    });
+
+    const destinationsquery = query(collection(db, "destinations"));
+    const unsubscribedestinations = onSnapshot(destinationsquery, (querySnapshot) => {
+      const destinations: Destination[] = [];
+      querySnapshot.forEach((doc) => {
+        destinations.push(doc.data() as Destination);
+      });
+      setDestinations(destinations);
+    });
+
+    return () => {
+      unsubscribeBookings()
+      unsubscribedestinations()
+    };
+  }, [user]);
+
+  const rows = bookings.map((booking) => ({
+    ...booking,
+    id: booking.docid,
+    tripName: getDestinationNameByDocId(booking.tripid, destinations) || booking.tripid,
+  }));
 
   return (
     <div className="app-container">
-      <NavigationBar/>
-      <TopBar/>
-      <div className='ml-[100px] mt-[50px] p-4 flex justify-center w-full'>
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer className='w-full' sx={{ maxHeight: 440 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  style={{ minWidth: column.minWidth }}
-                  align={column.align || 'left'}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {bookings.map((booking) => (
-              <TableRow key={booking.docid}>
-                {columns.map((column) => {
-                  const value = (booking as any)[column.id];
-                  return (
-                    <TableCell key={column.id} align={column.align || 'left'}>
-                      {column.id === 'view' && (
-                        <button className='bg-[#002B4A] text-white px-4 py-2 rounded'>View</button>
-                      )}
-                      {column.id === 'edit' && (
-                        <button className='bg-[#336488] text-white px-4 py-2 rounded'>Edit</button>
-                      )}
-                      {column.id === 'delete' && (
-                        <button className='bg-rose-600 text-white px-4 py-2 rounded'>Delete</button>
-                      )}
-                      {!['view', 'edit', 'delete'].includes(column.id) && (
-                        column.format ? column.format(value) : value
-                      )}                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={bookings.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+      <NavigationBar />
+      <TopBar />
+      <div className='ml-[100px] mt-[50px] p-4 flex flex-col justify-center w-1/2'>
+        <div className='text-white mb-2'>
+          <h1>BOOKED TRIPS</h1>
+        </div>
+        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+          <DataGrid
+            rows={rows}
+            rowHeight={50}
+            columns={columns}
+            pageSizeOptions={[5, 10, 20]}
+            autoHeight
+            disableRowSelectionOnClick
+          />
+        </Paper>
       </div>
     </div>
   );

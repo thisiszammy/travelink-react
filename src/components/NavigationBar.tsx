@@ -52,6 +52,15 @@ const NavigationBar: React.FC = () => {
           <span>Booking</span>
         </div>
       </button>
+      <button
+        className={`nav-button ${activeButton === '/aboutuscontactus' ? 'active' : ''}`}
+        onClick={() => handleClick('/aboutuscontactus')}
+      >
+        <div className="nav-icon">
+          <FontAwesomeIcon icon={faBook} />
+          <span>About</span>
+        </div>
+      </button>
     </div>
   );
 };

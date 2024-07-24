@@ -11,9 +11,9 @@ const Account: React.FC = () => {
     <div className="app-container">
       <NavigationBar/>
       <TopBar/>
-        <div className="account-page content">
+        <div className="relative ml-[80px] account-page content w-100 h-screen">
           <Drawer />
-          <div className="account-content">
+          <div className="account-content w-full h-full">
             <h1>Account Page</h1>
             <p>This is the Booking page content.</p>
           </div>
