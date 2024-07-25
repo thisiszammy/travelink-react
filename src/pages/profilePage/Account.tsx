@@ -2,14 +2,12 @@
 import React from 'react';
 import Drawer from '../../components/Drawer';
 import './Account.css';
-import NavigationBar from '../../components/NavigationBar';
 import TopBar from '../../components/TopBar';
 
 const Account: React.FC = () => {
 
   return (
     <div className="app-container">
-      <NavigationBar/>
       <TopBar/>
         <div className="account-page content">
           <Drawer />

@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { MantineProvider } from '@mantine/core';
 import './res/styles/globals.css';
 
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

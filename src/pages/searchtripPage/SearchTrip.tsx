@@ -7,9 +7,7 @@ import { TableTrips, getDocs } from '../../data/firebaseConfig';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button } from '@mantine/core';
 import BookingForm from '../bookingForm/BookingForm';
-import NavigationBar from '../../components/NavigationBar';
 import TopBar from '../../components/TopBar';
-import '../../components/NavigationBar.css'
 
 interface Trip {
   id: string;
@@ -151,9 +149,8 @@ const SearchTrip: React.FC = () => {
 
   return (
     <div className="w-full">
-      <NavigationBar/>
-      <TopBar/>
       <div className="ml-[100px] mt-[50px]">
+      <TopBar/>
         <Modal opened={opened} onClose={close} title="Booking Form" size='100%'>
           <BookingForm
           id={selectedTrip?.id || "Error getting back Trip ID"} 
@@ -225,3 +222,4 @@ const SearchTrip: React.FC = () => {
 };
 
 export default SearchTrip;
+

@@ -10,6 +10,7 @@ import { Timestamp, addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../data/firebaseConfig';
 import Swal from 'sweetalert2'
 import { useAuth } from '../../utils/AuthContext';
+import TopBar from '../../components/TopBar';
 
 
 interface LatLng {
@@ -144,6 +145,7 @@ const AddTripForm = () => {
   return (
     <div className='flex w-screen h-screen justify-center items-center addtripform whitespace-nowrap'>
       <div className='flex w-[70vw] h-auto'>
+      <TopBar/>
         <div className='flex-1 flex-col bg-white w-1/2 h-auto p-4 space-y-[20px]'>
           <label className='sectionheader'>Destination Overview</label>
 
