@@ -94,7 +94,7 @@ const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName, close}) =
             eContactName: eContactName,
             eContact: eContact,
             timestamp: Timestamp.now(),
-            
+            status: 'Pending'
         };
 
         console.log(bookingInformation)
