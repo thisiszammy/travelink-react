@@ -566,7 +566,7 @@ const Booking: React.FC = () => {
         <div className='bg-white rounded mb-4 p-4 shadow-md'>
           <div className='rounded flex items-center'>
             <div className='flex items-center flex-1'>
-              <h1 className='font-bold text-gray-800'>BOOKED TRIPS</h1>
+              <label className='font-bold text-gray-800 text-3xl'>BOOKED TRIPS</label>
               <label className='ml-4 text-lg font-semibold text-gray-400'>{bookings.length} {bookings.length==1 ? 'trip' : 'trips'} found</label>
             </div>
             <ToggleButtonGroup
