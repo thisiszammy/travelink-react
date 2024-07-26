@@ -33,6 +33,7 @@ const TopBar: React.FC = () => {
     try {
       await auth.signOut();
       console.log('Logged out');
+      navigate ('/login')
     } catch (error) {
       console.error('Logout error:', error);
     }

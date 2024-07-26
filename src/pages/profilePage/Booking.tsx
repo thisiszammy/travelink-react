@@ -19,7 +19,7 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import AddTripForm from '../addTripForm/AddTripForm';
-
+import Paper from '@mui/material/Paper';
 const formatDate = (timestamp: Timestamp): string => {
   const date = timestamp.toDate();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -596,6 +596,7 @@ const Booking: React.FC = () => {
             </div>}
           </div>
         </div>
+
           <Paper sx={{height: '100%'}}>
             <DataGrid
               rows={rows}

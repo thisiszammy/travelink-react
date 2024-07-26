@@ -2,13 +2,15 @@
 import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faMapMarkerAlt, faTag, faMoneyBill, faMobileAlt } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faMapMarkerAlt, faTag, faMoneyBill, faMobileAlt,faMailBulk } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { db } from '../data/firebaseConfig';
 import LeafletMap from '../pages/Ridesleaflet';
 import Swal from 'sweetalert2';
+import 'leaflet/dist/leaflet.css';
+import emailjs from 'emailjs-com';
 
 interface RidesBookingModalProps {
   isOpen: boolean;
@@ -25,6 +27,7 @@ const RidesBookingModal: React.FC<RidesBookingModalProps> = ({ isOpen, onClose, 
   const [gcashNumber, setGcashNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [downPayment, setDownPayment] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleNumPassengersChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newNumPassengers = parseInt(event.target.value, 10);
@@ -53,12 +56,13 @@ const RidesBookingModal: React.FC<RidesBookingModalProps> = ({ isOpen, onClose, 
     setGcashNumber('');
     setOtp('');
     setDownPayment('');
+    setEmail('');
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!numPassengers || !totalPrice || !pickupLocation || !dropoffLocation || !gcashNumber || !otp || !downPayment) {
+    if (!numPassengers || !totalPrice || !pickupLocation || !dropoffLocation || !gcashNumber || !otp || !downPayment || !email) {
       toast.error('All fields are required. Please fill out the form completely.', {});
       return;
     }
@@ -78,19 +82,32 @@ const RidesBookingModal: React.FC<RidesBookingModalProps> = ({ isOpen, onClose, 
       gcashNumber,
       otp,
       downPayment,
-      timestamp: new Date(),
+      email,
+      timestamp: Timestamp.fromDate(new Date()),
     };
 
     try {
       await addDoc(collection(db, 'BookingRides'), bookingData);
       toast.success('Your Ride will soon arrive!', {});
-      onClose();
       Swal.fire({
         title: 'Success!',
         text: 'Your ride has been booked successfully!',
         icon: 'success',
         confirmButtonText: 'OK'
       });
+
+      const templateParams = {
+        to_name: 'Customer',
+        to_email: email,
+        ride_name: name,
+        total_price: totalPrice,
+        pickup_location: pickupLocation,
+        dropoff_location: dropoffLocation,
+      };
+
+      await emailjs.send('your_service_id', 'your_template_id', templateParams, 'your_user_id');
+
+      onClose();
       clearForm();
     } catch (error) {
       toast.error('Error booking ride. Please try again.', {});
@@ -242,6 +259,21 @@ const RidesBookingModal: React.FC<RidesBookingModalProps> = ({ isOpen, onClose, 
               onChange={(e) => setOtp(e.target.value)}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg"
               placeholder="Enter OTP"
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="email" className="block text-lg font-medium text-gray-700">
+              <FontAwesomeIcon icon={faMailBulk} className="mr-2" />
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-lg"
+              placeholder="Enter email"
             />
           </div>
           <button type="submit" className="w-full flex justify-center py-3 px-4 border border-transparent text-lg font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faAddressCard, faCity, faMapMarkerAlt, faMailBulk, faPhone, faTag } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faAddressCard, faCity, faMapMarkerAlt, faMailBulk, faPhone, faTag, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
-import { addDoc, collection } from 'firebase/firestore';
+import { addDoc, collection, Timestamp } from 'firebase/firestore';
 import { db } from '../../data/firebaseConfig';
-import { useAuth } from '../../utils/AuthContext'; // Import useAuth
+import { useAuth } from '../../utils/AuthContext';
 import emailjs from 'emailjs-com';
 
 interface BookingFormModalProps {
@@ -17,12 +17,13 @@ interface BookingFormModalProps {
 }
 
 const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, name, price }) => {
-  const { user } = useAuth(); // Use useAuth to get the user object
+  const { user } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState('');
   const [otp, setOtp] = useState('');
   const [gcashNumber, setGcashNumber] = useState('');
   const [downPayment, setDownPayment] = useState('');
   const [isPayPalConfirmed, setIsPayPalConfirmed] = useState(false);
+  const [email, setEmail] = useState('');
 
   if (!isOpen) return null;
 
@@ -45,10 +46,11 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
       adults: formData.get('adults'),
       children: formData.get('children'),
       bookedby: user?.uid,
-      timestamp: new Date(),
+      timestamp: Timestamp.fromDate(new Date()),
       paymentMethod,
       paymentDetails: formData.get('payment-details'),
       downPayment,
+      status: 'Pending',
     };
 
     if (paymentMethod === 'GCash' && otp !== '1234') {
@@ -72,7 +74,7 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
     }
 
     try {
-      await addDoc(collection(db, 'BookingTours'), bookingData);
+      await addDoc(collection(db, 'bookingReceipts'), bookingData);
       Swal.fire({
         title: 'Success!',
         text: 'Booked successfully!',
@@ -114,7 +116,7 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
 
   const handlePayPalConfirm = async (email: string, amount: string) => {
     const confirmationUrl = `http://localhost:3000/confirmation?email=${email}&amount=${amount}`;
-  
+
     const templateParams = {
       to_name: 'Customer',
       from_name: 'Travelink',
@@ -122,7 +124,7 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
       message: `Please confirm your PayPal payment of ${amount}.`,
       confirmation_url: confirmationUrl,
     };
-    
+
     try {
       await emailjs.send('service_al8u5gq', 'template_qiji32t', templateParams, 'T1-lD4rd0KGN9IXnJ');
       Swal.fire({
@@ -154,12 +156,12 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="room-name" className="flex items-center">
+            <label htmlFor="trip-name" className="flex items-center">
               <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
-              Destination Name
+              Trip Name
             </label>
             <input
-              id="room-name"
+              id="trip-name"
               name="name"
               type="text"
               readOnly
@@ -168,23 +170,24 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
             />
           </div>
           <div>
-            <label htmlFor="room-price" className="flex items-center">
+            <label htmlFor="trip-price" className="flex items-center">
               <FontAwesomeIcon icon={faTag} className="mr-2" />
               Price
             </label>
             <input
-              id="room-price"
+              id="trip-price"
               name="price"
               type="text"
               readOnly
-              value={price}
+              value={`₱${price}`}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>
           <div className="flex space-x-4">
             <div className="w-1/2">
               <label htmlFor="check-in" className="flex items-center">
-                Check In
+                <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                Start Date
               </label>
               <input
                 id="check-in"
@@ -196,7 +199,8 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
             </div>
             <div className="w-1/2">
               <label htmlFor="check-out" className="flex items-center">
-                Check Out
+                <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                End Date
               </label>
               <input
                 id="check-out"
@@ -205,41 +209,6 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
               />
-            </div>
-          </div>
-          <div className="flex space-x-4">
-            <div className="w-1/2">
-              <label htmlFor="adults" className="flex items-center">
-                Adults
-              </label>
-              <select
-                id="adults"
-                name="adults"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              >
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-            </div>
-            <div className="w-1/2">
-              <label htmlFor="children" className="flex items-center">
-                Children
-              </label>
-              <select
-                id="children"
-                name="children"
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md"
-              >
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
             </div>
           </div>
           <div className="flex space-x-4">
@@ -357,6 +326,38 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md"
                 placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <label htmlFor="pickup-location" className="flex items-center">
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
+                Pick-up Location
+              </label>
+              <input
+                id="pickup-location"
+                name="pickup-location"
+                type="text"
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                placeholder="Pick-up Location"
+              />
+            </div>
+            <div className="w-1/2">
+              <label htmlFor="dropoff-location" className="flex items-center">
+                <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-2" />
+                Drop-off Location
+              </label>
+              <input
+                id="dropoff-location"
+                name="dropoff-location"
+                type="text"
+                required
+                className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                placeholder="Drop-off Location"
               />
             </div>
           </div>
@@ -445,7 +446,7 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
               />
               <button
                 type="button"
-                onClick={() => handlePayPalConfirm((document.getElementById('paypal-email') as HTMLInputElement).value,(downPayment))}
+                onClick={() => handlePayPalConfirm((document.getElementById('paypal-email') as HTMLInputElement).value, downPayment)}
                 className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition mt-2"
               >
                 Confirm
