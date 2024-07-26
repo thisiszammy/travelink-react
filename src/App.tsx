@@ -15,13 +15,18 @@ import AboutUsContactUs from './pages/about&contactusPage/About&ContactUs';
 import UpdateDeleteForm from './pages/UpdateDeleteForm/UpdateDeleteForm';
 import { AuthProvider } from './utils/AuthContext';
 import ProtectedRoute from './utils/ProtectedRoute';
-import NavigationBar from './components/NavigationBar';
 import Account from './pages/profilePage/Account';
 import Booking from './pages/profilePage/Booking';
-import TopBar from './components/TopBar';
+import TopBar from './components/LandingNavBar';
 import Drawer from './components/Drawer';
+import Hotels from './pages/Hotels';
+import Rides from './pages/Rides';
+import HotelBookingModal from './pages/HotelBookingModal';
+import NorthCebu from './CebuTours/NorthCebu';
+import SouthCebu from './CebuTours/SouthCebu';
+import CebuCity from './CebuTours/CebuCity';
+import Confirm from './pages/Confirmation';
 import './App.css';
-
 const App: React.FC = () => {
   return (
     <AuthProvider>
@@ -31,6 +36,12 @@ const App: React.FC = () => {
           <Route path="/booking" element={<ProtectedRoute element={<Booking />} />} />
           <Route path='/landing' element={<ProtectedRoute element={<Landing />} />} />
           <Route path='/catalog' element={<ProtectedRoute element={<CatalogPage />} />} />
+          <Route path='/confirmation' element={<ProtectedRoute element={<Confirm />} />} />
+          <Route path='/northcebu'  element={<NorthCebu />} />
+          <Route path='/southcebu'  element={<SouthCebu />} />
+          <Route path='/cebucity'  element={<CebuCity />} />
+          <Route path='/hotels'  element={<Hotels />} />
+          <Route path='/rides'  element={<Rides />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />

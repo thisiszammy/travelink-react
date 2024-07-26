@@ -1,57 +1,61 @@
-// src/components/NavigationBar.tsx
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faBook, faMagnifyingGlass, faHouse } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faBook, faMagnifyingGlass, faHouse, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import './NavigationBar.css';
 
 const NavigationBar: React.FC = () => {
   const navigate = useNavigate();
   const [activeButton, setActiveButton] = useState<string | null>(null);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleClick = (path: string) => {
     navigate(path);
     setActiveButton(path);
+    setIsOpen(false); // Close the navbar after clicking a link
   };
 
   return (
-    <div className="navbar">
-      <button
-        className={`nav-button ${activeButton === '/landing' ? 'active' : ''}`}
-        onClick={() => handleClick('/landing')}
+    <div className="fixed left-0 top-0 w-full z-20">
+      <div className="flex justify-between items-center p-4 bg-transparent text-white">
+        <button onClick={() => setIsOpen(!isOpen)} className="text-white focus:outline-none">
+          <FontAwesomeIcon icon={isOpen ? faTimes : faBars} />
+        </button>
+      </div>
+      <div
+        className={`flex flex-col bg-gray-800 bg-opacity-70 p-4 fixed left-0 top-0 h-full transition-transform duration-300 ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
       >
-        <div className="nav-icon">
-          <FontAwesomeIcon icon={faHouse} />
+        <button
+          className={`nav-button ${activeButton === '/landing' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          onClick={() => handleClick('/landing')}
+        >
+          <FontAwesomeIcon icon={faHouse} className="mr-2" />
           <span>Home</span>
-        </div>
-      </button>
-      <button
-        className={`nav-button ${activeButton === '/account' ? 'active' : ''}`}
-        onClick={() => handleClick('/account')}
-      >
-        <div className="nav-icon">
-          <FontAwesomeIcon icon={faUser} />
+        </button>
+        <button
+          className={`nav-button ${activeButton === '/account' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          onClick={() => handleClick('/account')}
+        >
+          <FontAwesomeIcon icon={faUser} className="mr-2" />
           <span>Account</span>
-        </div>
-      </button>
-      <button
-        className={`nav-button ${activeButton === '/searchtrip' ? 'active' : ''}`}
-        onClick={() => handleClick('/searchtrip')}
-      >
-        <div className="nav-icon">
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
+        <button
+          className={`nav-button ${activeButton === '/searchtrip' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          onClick={() => handleClick('/searchtrip')}
+        >
+          <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-2" />
           <span>Search</span>
-        </div>
-      </button>
-      <button
-        className={`nav-button ${activeButton === '/booking' ? 'active' : ''}`}
-        onClick={() => handleClick('/booking')}
-      >
-        <div className="nav-icon">
-          <FontAwesomeIcon icon={faBook} />
+        </button>
+        <button
+          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          onClick={() => handleClick('/booking')}
+        >
+          <FontAwesomeIcon icon={faBook} className="mr-2" />
           <span>Booking</span>
-        </div>
-      </button>
+        </button>
+      </div>
+
     </div>
   );
 };

@@ -1,4 +1,3 @@
-// src/pages/profilePage/Booking.tsx
 import React, { useEffect, useState } from 'react';
 import Drawer from '../../components/Drawer';
 import './Booking.css';
@@ -20,7 +19,6 @@ interface Column {
   id: string;
   label: string;
   minWidth?: number;
-  maxWidth?: number;
   align?: 'right' | 'left' | 'center';
   format?: (value: any) => string;
 }
@@ -37,118 +35,154 @@ const formatDate = (timestamp: Timestamp): string => {
 };
 
 const columns: readonly Column[] = [
-  { id: 'tripid', label: 'Trip ID', minWidth: 170 },
-  { id: 'startDate', label: 'Start Date', minWidth: 100 },
-  { id: 'endDate', label: 'End Date', minWidth: 100 },
+  { id: 'name', label: 'Destination Name', minWidth: 170 },
+  { id: 'price', label: 'Price', minWidth: 100 },
+  { id: 'firstName', label: 'First Name', minWidth: 100 },
+  { id: 'lastName', label: 'Last Name', minWidth: 100 },
+  { id: 'email', label: 'Email', minWidth: 100 },
+  { id: 'phone', label: 'Phone', minWidth: 100 },
+  { id: 'checkIn', label: 'Check In', minWidth: 100 },
+  { id: 'checkOut', label: 'Check Out', minWidth: 100 },
+  { id: 'adults', label: 'Adults', minWidth: 100 },
+  { id: 'children', label: 'Children', minWidth: 100 },
   { id: 'timestamp', label: 'Booked On', minWidth: 100, format: formatDate },
-  { id: 'view', label: '', minWidth: 100, },
+  { id: 'view', label: '', minWidth: 100 },
   { id: 'edit', label: '', minWidth: 100 },
   { id: 'delete', label: '', minWidth: 100 },
 ];
 
-interface BookingReceipt {
-  adults: number,
-  bookedby: string,
-  children: number,
-  docid: string,
-  eContact: string,
-  eContactName: string,
-  email: string,
-  endDate: string,
-  firstname: string,
-  lastname: string,
-  phoneNumber: string,
-  startDate: string,
-  timestamp: Timestamp,
-  tripid: string
+interface BookingTours {
+  name: string;
+  price: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  checkIn: string;
+  checkOut: string;
+  adults: string;
+  children: string;
+  bookedby: string;
+  timestamp: Timestamp;
 }
 
 const Booking: React.FC = () => {
-  const {user, userData, loading} = useAuth()
-  const [bookings, setBookings] = useState<BookingReceipt[]>([])
+  const { user } = useAuth();
+  const [bookings, setBookings] = useState<BookingTours[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
+  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
 
   useEffect(() => {
     if (!user) return;
 
-    const q = query(collection(db, "bookingReceipts"), where("bookedby", "==", user?.uid))
+    const q = query(collection(db, 'BookingTours'), where('bookedby', '==', user?.uid));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const bookings: BookingReceipt[] = []
+      const bookings: BookingTours[] = [];
       querySnapshot.forEach((doc) => {
-        bookings.push(doc.data() as BookingReceipt)
-      })
-      setBookings(bookings)
-      console.log(bookings)
-    })
+        bookings.push(doc.data() as BookingTours);
+      });
+      setBookings(bookings);
+      console.log(bookings);
+    });
     return () => unsubscribe();
-  }, [user])
+  }, [user]);
 
   return (
-    <div className="app-container">
-      <NavigationBar/>
-      <TopBar/>
-      <div className='ml-[100px] mt-[50px] p-4 flex justify-center w-full'>
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer className='w-full' sx={{ maxHeight: 440 }}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  style={{ minWidth: column.minWidth }}
-                  align={column.align || 'left'}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {bookings.map((booking) => (
-              <TableRow key={booking.docid}>
-                {columns.map((column) => {
-                  const value = (booking as any)[column.id];
-                  return (
-                    <TableCell key={column.id} align={column.align || 'left'}>
-                      {column.id === 'view' && (
-                        <button className='bg-[#002B4A] text-white px-4 py-2 rounded'>View</button>
-                      )}
-                      {column.id === 'edit' && (
-                        <button className='bg-[#336488] text-white px-4 py-2 rounded'>Edit</button>
-                      )}
-                      {column.id === 'delete' && (
-                        <button className='bg-rose-600 text-white px-4 py-2 rounded'>Delete</button>
-                      )}
-                      {!['view', 'edit', 'delete'].includes(column.id) && (
-                        column.format ? column.format(value) : value
-                      )}                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={bookings.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
+    <div className="min-h-screen flex flex-col items-center">
+      <TopBar />
+      <div className="container mx-auto mt-5 px-4">
+        <div className="w-full bg-gray-200 shadow-lg rounded-lg p-6">
+          <h1 className="text-2xl font-bold mb-4 text-center text-[#003554]">Your Booking</h1>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  {columns.map((column) => (
+                    <th
+                      key={column.id}
+                      className="py-2 px-4 bg-[#003554] text-white font-bold text-left"
+                      style={{ minWidth: column.minWidth }}
+                      align={column.align || 'left'}
+                    >
+                      {column.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {bookings.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((booking) => (
+                  <tr key={booking.timestamp.toMillis()} className="border-b">
+                    {columns.map((column) => {
+                      const value = (booking as any)[column.id];
+                      return (
+                        <td key={column.id} className="py-2 px-4 text-left">
+                          {column.id === 'view' && (
+                            <button className="bg-[#003554] text-white px-4 py-2 rounded hover:bg-[#005f7a] transition duration-200">
+                              View
+                            </button>
+                          )}
+                          {column.id === 'edit' && (
+                            <button className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200">
+                              Edit
+                            </button>
+                          )}
+                          {column.id === 'delete' && (
+                            <button className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-200">
+                              Delete
+                            </button>
+                          )}
+                          {!['view', 'edit', 'delete'].includes(column.id) &&
+                            (column.format ? column.format(value) : value)}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="flex justify-between items-center mt-4">
+            <div>
+              <label className="mr-2">Rows per page:</label>
+              <select
+                value={rowsPerPage}
+                onChange={handleChangeRowsPerPage}
+                className="border p-2 rounded"
+              >
+                {[10, 25, 100].map((rows) => (
+                  <option key={rows} value={rows}>
+                    {rows}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <button
+                onClick={() => setPage(page - 1)}
+                disabled={page === 0}
+                className="px-4 py-2 bg-gray-200 rounded mr-2"
+              >
+                Previous
+              </button>
+              <button
+                onClick={() => setPage(page + 1)}
+                disabled={page >= Math.ceil(bookings.length / rowsPerPage) - 1}
+                className="px-4 py-2 bg-gray-200 rounded"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

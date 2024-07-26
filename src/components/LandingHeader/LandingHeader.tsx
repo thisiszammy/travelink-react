@@ -2,8 +2,7 @@ import { User } from 'firebase/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGripLinesVertical, faCircleUser, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import './LandingHeader.css';
-import NavigationBar from '../NavigationBar';
-import TopBar from '../TopBar';
+import TopBar from '../LandingNavBar';
 
 
 function HeaderButtons(){
