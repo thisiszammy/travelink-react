@@ -4,8 +4,8 @@ import { faBell, faChevronDown, faUser } from '@fortawesome/free-solid-svg-icons
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import './TopBar.css';
-import { auth } from '../data/firebaseConfig';
-import { useAuth } from '../utils/AuthContext';
+import { auth } from '../../data/firebaseConfig';
+import { useAuth } from '../../utils/AuthContext';
 
 const TopBar: React.FC = () => {
   const { user, userData, loading } = useAuth();

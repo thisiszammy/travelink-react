@@ -1,0 +1,130 @@
+.account-info {
+  width: 100%;
+  text-align: center;
+  flex-grow: 1;
+  transition: margin-left 0.3s ease; /* Smooth transition for content adjustment */
+}
+
+h1 {
+  font-size: 24px;
+  color: #336488;
+  margin-bottom: 20px;
+  letter-spacing: 7px;
+  margin-left: 10%;
+}
+
+.profile-card {
+  display: flex;
+  align-items: center;
+  background-color: #0A2742;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  position: relative;
+  width: 40%;
+  justify-items: center;
+  margin-left: 10%;
+}
+
+.profile-picture img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.profile-details h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.profile-details p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.edit-button {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.account-form {
+  background-color: #0A2742;
+  color: #fff; /* Change text color to white for better visibility */
+  padding: 20px;
+  border-radius: 10px;
+  width: 40%;
+  margin-left: 10%;
+}
+
+.account-form label {
+  display: block;
+  margin-bottom: 10px;
+  text-align: left;
+  position: relative;
+}
+
+.account-form input,
+.account-form select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff; /* Ensure background is white for readability */
+  color: #000; /* Ensure text color is black for contrast */
+}
+
+.birthdate-input {
+  display: flex;
+  align-items: center;
+}
+
+.birthdate-input select,
+.birthdate-input input {
+  width: auto;
+  flex: 1;
+  margin-right: 5px;
+}
+
+.birthdate-input button {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.birthdate-input button img {
+  width: 20px;
+  height: 20px;
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+.apply-changes,
+.cancel-changes {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+}
+
+.apply-changes {
+  background-color: #336488;
+}
+
+.cancel-changes {
+  background-color: #4d4d4d;
+}

@@ -153,13 +153,6 @@ const TopBar: React.FC = () => {
           <span>Booking</span>
         </button>
         <button
-          className={`nav-button ${activeButton === '/searchtrip' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
-          onClick={() => handleClick('/addtripform')}
-        >
-          <FontAwesomeIcon icon={faAddressCard} className="mr-2" />
-          <span>Add Trip</span>
-        </button>
-        <button
           className={`nav-button ${activeButton === '/faq' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
           onClick={() => handleClick('/faq')}
         >

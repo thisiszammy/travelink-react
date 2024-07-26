@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import './addActivities.css'
 import AddIcon from '@mui/icons-material/Add';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { db, storage } from '../../../data/firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL, deleteObject } from 'firebase/storage';
 
@@ -117,7 +118,7 @@ const AddActivities: React.FC<AddActivitiesProps> = ({ActivityObject, setActivit
                     <button
                     className='bg-[#002B4A] py-1 px-2 items-end text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
                     onClick={handleAddActivityObject}>
-                        <AddIcon/>
+                        <CheckCircleIcon/>
                     </button>
                 </div>
                 <input
