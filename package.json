@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
-    "@fortawesome/fontawesome-svg-core": "^6.5.2",
-    "@fortawesome/free-solid-svg-icons": "^6.5.2",
-=======
     "@awesome.me/kit-KIT_CODE": "file:latestnpm install --save @awesome.me/kit-KIT_CODE@latest",
     "@emailjs/browser": "^4.4.1",
     "@emotion/react": "^11.11.4",
@@ -16,7 +10,6 @@
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-brands-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
->>>>>>> master
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@lottiefiles/react-lottie-player": "^3.5.4",
     "@mantine/carousel": "^7.11.1",
@@ -26,16 +19,12 @@
     "@mantine/hooks": "^7.11.1",
     "@mantine/modals": "^7.11.1",
     "@mantine/notifications": "^7.11.1",
-<<<<<<< HEAD
     "@mui/material": "^5.16.4",
     "@mui/x-date-pickers": "^7.11.0",
-=======
     "@mui/icons-material": "^5.16.0",
-    "@mui/material": "^5.16.0",
     "@mui/styles": "^5.16.4",
     "@mui/x-data-grid": "^7.11.0",
     "@react-google-maps/api": "^2.19.3",
->>>>>>> master
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -44,12 +33,8 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "bootstrap": "^5.3.3",
-<<<<<<< HEAD
     "dayjs": "^1.11.12",
-=======
-    "dayjs": "^1.11.11",
     "emailjs-com": "^3.2.0",
->>>>>>> master
     "embla-carousel-react": "^8.1.6",
     "firebase": "^10.12.4",
     "font-awesome": "^4.7.0",
@@ -59,11 +44,8 @@
     "lottie-react": "^2.4.0",
     "lottie-web": "^5.12.2",
     "react": "^18.3.1",
-<<<<<<< HEAD
-=======
     "react-bootstrap": "^2.10.4",
     "react-date-picker": "^11.0.0",
->>>>>>> master
     "react-datepicker": "^7.3.0",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.52.1",
