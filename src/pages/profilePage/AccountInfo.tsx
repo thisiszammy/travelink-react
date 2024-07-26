@@ -227,7 +227,7 @@ const AccountInfo: React.FC = () => {
 
 
   return (
-    <div className="account-info bg-[#336488] h-screen w-full overflow-hidden flex flex-col  items-center">
+    <div className="account-info bg-[#336488] h-screen w-full overflow-auto flex flex-col  items-center">
       <Drawer />
       <TopBar/>
       <br></br>
