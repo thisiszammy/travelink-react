@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Drawer from '../../components/Drawer/Drawer';
 import './Booking.css';
-import NavigationBar from '../../components/NavigationBar';
+//import NavigationBar from '../../components/NavigationBar';
 //import TopBar from '../../components/TopBar';
 import TopBar from '../../components/LandingNavBar';
 import Paper from '@mui/material/Paper';
