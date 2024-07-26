@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import {getStorage} from 'firebase/storage'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider, FacebookAuthProvider  } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, GoogleAuthProvider, FacebookAuthProvider, signInWithPhoneNumber, RecaptchaVerifier  } from 'firebase/auth';
 
 /*const firebaseConfig = {
   apiKey: "AIzaSyC0hm62Hbuc7W4jr8Z_w8d99k7ErVP-YPI",
@@ -34,4 +34,4 @@ const TableTrips = collection(db, 'destinations');
 const googleProvider = new GoogleAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, googleProvider, facebookProvider, TableTrips, storage, getDocs };
+export { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, googleProvider, facebookProvider, TableTrips, storage, getDocs, signInWithPhoneNumber, RecaptchaVerifier  };
