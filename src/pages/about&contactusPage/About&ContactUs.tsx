@@ -2,17 +2,13 @@ import React from 'react';
 import './about-contact-us-page.css';
 import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import TopBar from '../../components/LandingNavBar';
 
 const AboutAndContactUs = () => {
   return (
     <div className="about-contact-us-page container mx-auto p-4">
-      <header className="header flex justify-between items-center p-4 bg-blue-800 text-white shadow-md rounded-lg">
-        <h1 className="text-3xl font-bold">TraveLink</h1>
-        <nav className="flex space-x-4">
-          <a href="/searchtrip" className="nav-link">Search Trips</a>
-          <a href="/about-contact-us" className="nav-link active">About Us & Contact Us</a>
-        </nav>
-      </header>
+      <TopBar />
+      <br></br>
       <main className="main mt-4">
         <motion.section
           className="content p-4 bg-white rounded-lg shadow-lg mb-8"

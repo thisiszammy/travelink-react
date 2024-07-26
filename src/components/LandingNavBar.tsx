@@ -99,7 +99,7 @@ const TopBar: React.FC = () => {
               )}
             </AnimatePresence>
           </div>
-          <Link to="/about" className="bg-transparent text-white hover:text-blue-500 no-underline py-2 px-2 rounded-full">About Us</Link>
+          <Link to="/aboutuscontactus" className="bg-transparent text-white hover:text-blue-500 no-underline py-2 px-2 rounded-full">About Us</Link>
           <FontAwesomeIcon icon={faBell} className="cursor-pointer text-white hover:text-black" />
           <div className="border-l h-6 border-white mx-2"></div>
           <div className="flex items-center cursor-pointer text-white hover:text-black" onClick={handleMenuOpen}>
