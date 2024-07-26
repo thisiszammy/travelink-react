@@ -511,8 +511,30 @@ const Landing: React.FC = () => {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      {selectedTour && (
+        <TourDetailsModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          tour={selectedTour}
+        />
+      )}
+
+      {isBookingFormOpen && (
+        <BookingFormModal
+          isOpen={isBookingFormOpen}
+          onClose={() => setIsBookingFormOpen(false)}
+          name={bookingDetails.name}
+          price={bookingDetails.price}
+        />
+      )}
+    </div>
   );
 };
 
 export default Landing;
+

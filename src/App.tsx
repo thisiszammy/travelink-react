@@ -17,15 +17,21 @@ import { AuthProvider } from './utils/AuthContext';
 import ProtectedRoute from './utils/ProtectedRoute';
 import Account from './pages/profilePage/Account';
 import Booking from './pages/profilePage/Booking';
-import TopBar from './components/LandingNavBar';
-import Drawer from './components/Drawer';
 import Hotels from './pages/Hotels';
 import Rides from './pages/Rides';
-import HotelBookingModal from './pages/HotelBookingModal';
 import NorthCebu from './CebuTours/NorthCebu';
 import SouthCebu from './CebuTours/SouthCebu';
 import CebuCity from './CebuTours/CebuCity';
 import Confirm from './pages/Confirmation';
+import FAQ from './pages/FAQ';
+import Package1 from './pages/Package1';
+import Package2 from './pages/Package2';
+import Package3 from './pages/Package3';
+import Package4 from './pages/Package4';
+import Package5 from './pages/Package5';
+import PackageModal from './pages/PackageModal';
+
+
 import './App.css';
 const App: React.FC = () => {
   return (
@@ -37,11 +43,17 @@ const App: React.FC = () => {
           <Route path='/landing' element={<ProtectedRoute element={<Landing />} />} />
           <Route path='/catalog' element={<ProtectedRoute element={<CatalogPage />} />} />
           <Route path='/confirmation' element={<ProtectedRoute element={<Confirm />} />} />
+          <Route path='/faq'  element={<FAQ />} />
           <Route path='/northcebu'  element={<NorthCebu />} />
           <Route path='/southcebu'  element={<SouthCebu />} />
           <Route path='/cebucity'  element={<CebuCity />} />
           <Route path='/hotels'  element={<Hotels />} />
           <Route path='/rides'  element={<Rides />} />
+          <Route path='/package1'  element={<Package1 />} />
+          <Route path='/package2'  element={<Package2 />} />
+          <Route path='/package3'  element={<Package3 />} />
+          <Route path='/package4'  element={<Package4 />} />
+          <Route path='/package5'  element={<Package5 />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
