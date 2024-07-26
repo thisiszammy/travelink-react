@@ -1,6 +1,6 @@
 // src/pages/profilePage/Booking.tsx
 import React from 'react';
-import Drawer from '../../components/Drawer';
+import Drawer from '../../components/Drawer/Drawer';
 import './Booking.css';
 
 const Booking: React.FC = () => {

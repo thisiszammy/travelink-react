@@ -1,6 +1,6 @@
 // src/pages/profilePage/Account.tsx
 import React from 'react';
-import Drawer from '../../components/Drawer';
+import Drawer from '../../components/Drawer/Drawer';
 import './Account.css';
 
 const Account: React.FC = () => {

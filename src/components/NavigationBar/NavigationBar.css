@@ -1,8 +1,9 @@
 /* src/components/NavigationBar.css */
 .navbar {
     width: 100px;
-    height: 100vh;
-    background-color: #002B4A;
+    height: 500vh;
+    
+    background-color: ']6t5';
     display: flex;
     flex-direction: column;
     padding: 20px;
