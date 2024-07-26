@@ -9,7 +9,6 @@ import { Modal, Button } from '@mantine/core';
 import BookingForm from '../bookingForm/BookingForm';
 import TopBar from '../../components/LandingNavBar';
 
-
 interface Trip {
   id: string;
   DestinationName: string;
