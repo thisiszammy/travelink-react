@@ -1,0 +1,270 @@
+/* Add this to style the icons properly */
+.result-item .icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.result-item .icons span {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* Other CSS rules */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin: 0;
+  padding: 20px;
+  
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1c3d72;
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header .icons {
+  display: flex;
+  gap: 20px;
+}
+
+.header .icon-bell,
+.header .icon-user {
+  font-size: 1.5rem;
+}
+
+.main {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.sidebar {
+  width: 30%;
+  background-color: #f0f4f8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+
+.search-bar:focus {
+  border-color: #1c3d72;
+  box-shadow: 0 0 5px rgba(28, 61, 114, 0.5);
+}
+
+.filter-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #1c3d72;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #144a8c;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.result-item {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.result-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.result-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.result-item h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.result-item p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.result-item .icons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.result-item .icons span {
+  font-size: 1rem;
+  color: #555;
+}
+
+.content {
+  width: 70%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tabs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  background-color: #f0f4f8;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab:hover {
+  background-color: #e1e8ef;
+}
+
+.tab.active {
+  background-color: #1c3d72;
+  color: white;
+}
+
+.tab-content-container {
+  padding: 20px;
+  background-color: #f0f4f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  color: #1c3d72;
+}
+
+.tab-content p {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+.tab-content ul {
+  margin-bottom: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #1c3d72; /* Ensure the text color is visible */
+}
+
+.tab-content ul li {
+  font-size: 1rem; /* Ensure the font size is large enough */
+  color: #1c3d72;
+}
+
+.tab-content .payment-channels {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tab-content .payment-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.book-now {
+  padding: 10px 20px;
+  background-color: #1c3d72;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.book-now:hover {
+  background-color: #144a8c;
+}
+
+.activities {
+  display: flex;
+  gap: 10px;
+}
+
+.activity-card {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  text-align: center;
+  transition: all 0.3s;
+}
+
+.activity-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.review-card {
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.review-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.placeholder-text {
+  font-size: 1.25rem;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
