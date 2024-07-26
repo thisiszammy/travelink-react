@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Drawer from '../../components/Drawer/Drawer';
 import './PasswordAndSecurity.css';
+import TopBar from '../../components/LandingNavBar';
 
 const PasswordAndSecurity: React.FC = () => {
   const [showChangePassword, setShowChangePassword] = useState(false);
@@ -31,9 +32,11 @@ const PasswordAndSecurity: React.FC = () => {
   }, [showChangePassword, showTwoFactor]);
 
   return (
-    <div className="password-security">
+    <div className="password-security bg-[#336488] h-screen w-full flex flex-col items-center">
       <Drawer />
-      <h1>PASSWORD & SECURITY</h1>
+      <TopBar/>
+      <br></br>
+      <h1 className='pt-[75px] text-white'>PASSWORD & SECURITY</h1>
       
       <div className="password-card">
         <br></br>

@@ -38,10 +38,6 @@ const Drawer: React.FC = () => {
             Password & Security
           </button>
           <br></br>
-          <button className={getButtonClass('/account/history')} onClick={() => navigate('/account/history')}>
-            <FontAwesomeIcon icon={faHistory} className="drawer-icon" />
-            Travel History
-          </button>
         </div>
       )}
     </div>

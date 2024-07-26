@@ -1,10 +1,10 @@
 /* src/components/Drawer.css */
 .drawer {
   position: fixed;
-  top: 60px; /* Adjust to align below the TopBar */
-  left: 100px;
-  height: calc(100% - 50px); /* Adjust to align below the TopBar */
-  background-color: #336488;
+  top: 0px; /* Adjust to align below the TopBar */
+  left: 0px;
+  height: 100vh; /* Adjust to align below the TopBar */
+  background-color: #002B4A;
   color: white;
   transition: transform 0.3s ease; /* Smooth transition for the drawer */
   z-index: 1;
@@ -64,7 +64,7 @@
 
 .drawer-button.active {
   color: #ddd;
-  background-color: #002B4A;
+  background-color: #336488;
 
 }
 

@@ -31,7 +31,7 @@ const App: React.FC = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/account" element={<ProtectedRoute element={<Account />} />} />
+          <Route path="/account" element={<ProtectedRoute element={<AccountInfo />} />} />
           <Route path="/account/information" element={<AccountInfo />} />
           <Route path="/account/security" element={<PasswordAndSecurity />} />
           <Route path="/booking" element={<ProtectedRoute element={<Booking />} />} />
