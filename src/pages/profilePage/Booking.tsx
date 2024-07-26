@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Drawer from '../../components/Drawer';
+// src/pages/profilePage/Booking.tsx
+import React from 'react';
+import Drawer from '../../components/Drawer/Drawer';
 import './Booking.css';
 import NavigationBar from '../../components/NavigationBar';
 import TopBar from '../../components/TopBar';

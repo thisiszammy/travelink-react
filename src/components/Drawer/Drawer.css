@@ -1,0 +1,73 @@
+/* src/components/Drawer.css */
+.drawer {
+  position: fixed;
+  top: 60px; /* Adjust to align below the TopBar */
+  left: 100px;
+  height: calc(100% - 50px); /* Adjust to align below the TopBar */
+  background-color: #336488;
+  color: white;
+  transition: transform 0.3s ease; /* Smooth transition for the drawer */
+  z-index: 1;
+}
+
+.drawer.open {
+  width: 350px;
+  transform: translateX(0); /* Fully visible */
+}
+
+.drawer.closed {
+  width: 250px;
+  transform: translateX(-250px); /* Hidden to the right */
+}
+
+.toggle-button {
+  background: #444;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding-top: 0px;
+  height: 7vh;
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  padding-left: 10px;
+  right: -20px;
+}
+
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.drawer-button {
+  display: fixed;
+  align-items: center;
+  background: none;
+  border: 2px solid transparent;
+  color: white;
+  background-color: #4D4D4D;
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, border-color 0.3s;
+  border-radius: 20px;
+  width: 300px;
+}
+
+.drawer-button:hover {
+  color: #ddd;
+  border-color: #ddd;
+}
+
+.drawer-button.active {
+  color: #ddd;
+  background-color: #002B4A;
+
+}
+
+.drawer-icon {
+  margin-right: 10px;
+}

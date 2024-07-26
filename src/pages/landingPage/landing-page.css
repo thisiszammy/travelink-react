@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* landing-page.css */
 /*
 .main-container2 {
@@ -96,6 +97,11 @@
 @media (max-width: 768px) {
   .navbar-nav {
     flex-direction: column;
+=======
+   .main-container1 {
+    display: flex;
+    justify-content: center;
+>>>>>>> 6fec84baf52076a3a5b9074bbd64b4cb95051052
     align-items: center;
   }
 

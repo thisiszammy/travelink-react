@@ -6,7 +6,7 @@ import Register from './pages/registerPage/Register';
 import ForgotPassword from './pages/passwordRecovery/forgotpassword';
 import CatalogPage from './pages/catalogPage/CatalogPage';
 import TravelinkAppShell from './components/TravelinkAppShell';
-import { MantineProvider } from '@mantine/core';
+//import { MantineProvider } from '@mantine/core';
 import AddTripForm from './pages/addTripForm/AddTripForm';
 import Landing from './pages/landingPage/Landing';
 import BookingForm from './pages/bookingForm/BookingForm';
@@ -16,11 +16,14 @@ import UpdateDeleteForm from './pages/UpdateDeleteForm/UpdateDeleteForm';
 import { AuthProvider } from './utils/AuthContext';
 import ProtectedRoute from './utils/ProtectedRoute';
 import NavigationBar from './components/NavigationBar';
+//import NavigationBar from './components/NavigationBar/NavigationBar';
 import Account from './pages/profilePage/Account';
 import Booking from './pages/profilePage/Booking';
-import TopBar from './components/TopBar';
-import Drawer from './components/Drawer';
+import TopBar from './components/TopBar/TopBar';
+import Drawer from './components/Drawer/Drawer';
 import './App.css';
+import AccountInfo from './pages/profilePage/AccountInfo';
+import PasswordAndSecurity from './pages/profilePage/PasswordAndSecurity';
 
 const App: React.FC = () => {
   return (
