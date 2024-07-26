@@ -1,13 +1,11 @@
 .account-info {
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-    flex-grow: 1;
-    padding: 20px;
-    margin-left: 400px; /* Width of open drawer */
-    transition: margin-left 0.3s ease; /* Smooth transition for content adjustment */
-  }
-  
+  width: 100%;
+  text-align: center;
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 400px; /* Width of open drawer */
+  transition: margin-left 0.3s ease; /* Smooth transition for content adjustment */
+}
   h1 {
     font-size: 24px;
     color: #336488;
@@ -24,6 +22,9 @@
     border-radius: 10px;
     margin-bottom: 20px;
     position: relative;
+    width: 60%;
+    justify-items: center;
+    margin-left: 18%;
   }
   
   .profile-picture img {
@@ -60,6 +61,8 @@
     color: #fff;
     padding: 20px;
     border-radius: 10px;
+    width: 60%;
+    margin-left: 18%;
   }
   
   .account-form label {
