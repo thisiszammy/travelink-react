@@ -34,7 +34,7 @@ const formatNumberWithCommas = (value: string) => {
 };
 
 
-const AddTripForm = () => {
+const AddTripForm:React.FC<any> = ({handleClose}) => {
   const {user, userData, loading} = useAuth()
   const [destinationname, setDestinationName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
@@ -143,7 +143,7 @@ const AddTripForm = () => {
     return <div>Loading...</div>;
   }
   return (
-    <div className='flex w-screen h-screen justify-center items-center addtripform whitespace-nowrap'>
+    <div className='flex justify-center items-center addtripform whitespace-nowrap'>
       <div className='flex w-[70vw] h-auto'>
       <TopBar/>
         <div className='flex-1 flex-col bg-white w-1/2 h-auto p-4 space-y-[20px]'>
@@ -245,7 +245,7 @@ const AddTripForm = () => {
             </button>
             <button
                 className='bg-[#9AA5AC] ml-4 py-3 px-4 text-white font-bold rounded-[15px] text-xl drop-shadow-md hover:bg-[#336488]'
-                //onClick={handleSubmit}
+                onClick={handleClose}
             >
               Cancel
             </button>
