@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Drawer from '../../components/Drawer/Drawer';
 import './Booking.css';
-import NavigationBar from '../../components/NavigationBar/NavigationBar';
-import TopBar from '../../components/TopBar/TopBar';
+import NavigationBar from '../../components/NavigationBar';
+//import TopBar from '../../components/TopBar';
+import TopBar from '../../components/LandingNavBar';
 import Paper from '@mui/material/Paper';
 import { useAuth } from '../../utils/AuthContext';
 import { Timestamp, collection, query, where, onSnapshot, doc, updateDoc } from 'firebase/firestore';
@@ -560,9 +561,8 @@ const Booking: React.FC = () => {
           {selectedButton==="AddTrip" && <AddTripForm handleClose={handleClose}/>}
         </Box>
       </Modal>
-      <NavigationBar />
       <TopBar />
-      <div className='bg-[#EAEEF1] ml-[100px] mt-[50px] p-4 flex flex-col justify-center w-full h-[1000px]'>
+      <div className='bg-[#EAEEF1] mt-[75px] p-4 flex flex-col justify-center w-full h-[1000px]'>
         <div className='bg-white rounded mb-4 p-4 shadow-md'>
           <div className='rounded flex items-center'>
             <div className='flex items-center flex-1'>
