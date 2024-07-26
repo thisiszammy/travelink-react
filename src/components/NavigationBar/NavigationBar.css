@@ -1,55 +1,55 @@
 /* src/components/NavigationBar.css */
 .navbar {
-    width: 100px;
-    height: 500vh;
-    background-color: #002B4A;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    z-index: 3;
-  }
-  
-  .nav-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    color: rgb(180, 180, 180);
-    background: none;
-    border: none;
-    text-align: center;
-    cursor: pointer;
-    margin-bottom: 20px;
-    font-size: 18px;
-    transition: background-color 0.3s;
-  }
-  
-  .nav-button:hover {
-    display: flex;
-    background-color: #ffffff;
-    border: 2px;
-    border-radius: 5px;
-  }
 
-  .nav-button:hover svg,
-.nav-button:hover span {
-  color: rgb(93, 93, 93); /* Change icon and text color on hover */
-
+  width: 100px;
+  height: 100vh;
+  background-color: #002B4A;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  z-index: 3;
+  position: fixed;
+  top: 0;
+  left: 0; /* Fixed to the left */
 }
 
-  
-  .nav-button.active {
-   /* background-color: #555; /* Change background color for active button */
-    color: rgb(255, 255, 255);
-    border-radius: 5px;
-  }
-  
-  .nav-button svg {
-    font-size: 24px;
-    margin-bottom: 0px;
-  }
-  
-  .nav-button span {
-    margin-top: 0px;
-    font-size: 12px;
-  }
+.nav-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  color: rgb(180, 180, 180);
+  background: none;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+
+.nav-button:hover {
+  background-color: #ffffff;
+  border: 2px;
+  border-radius: 5px;
+}
+
+.nav-button:hover svg,
+.nav-button:hover span {
+  color: rgb(93, 93, 93); /* Change icon and text color on hover */
+}
+
+.nav-button.active {
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+
+.nav-button svg {
+  font-size: 24px;
+  margin-bottom: 0px;
+}
+
+.nav-button span {
+  margin-top: 0px;
+  font-size: 12px;
+}
