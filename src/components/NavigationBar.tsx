@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faBook, faMagnifyingGlass, faHouse, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -53,8 +53,7 @@ const NavigationBar: React.FC = () => {
         >
           <FontAwesomeIcon icon={faBook} className="mr-2" />
           <span>Booking</span>
-        </div>
-      </button>
+        </button>
       <button
         className={`nav-button ${activeButton === '/aboutuscontactus' ? 'active' : ''}`}
         onClick={() => handleClick('/aboutuscontactus')}
@@ -69,3 +68,15 @@ const NavigationBar: React.FC = () => {
 };
 
 export default NavigationBar;
+*/
+import React from 'react'
+
+const NavigationBar = () => {
+  return (
+    <div>
+      
+    </div>
+  )
+}
+
+export default NavigationBar
