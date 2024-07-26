@@ -7,6 +7,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
+import NavigationBar from '../../components/NavigationBar/NavigationBar';
+import TopBar from '../../components/TopBar/TopBar';
 
 interface AccountInfo {
   username: string;
@@ -70,7 +72,10 @@ const AccountInfo: React.FC = () => {
   };
 
   return (
+    
     <div className="account-info">
+  
+      <TopBar />
       <Drawer />
       <h1>ACCOUNT INFORMATION</h1>
       <div className="profile-card">

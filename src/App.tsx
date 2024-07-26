@@ -20,12 +20,9 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="app-container">
-        <NavigationBar />
-      
-          <TopBar />
           <div className="content">
             <Routes>
-              <Route path="/account" element={<Account />} />
+              <Route path="/account" element={<AccountInfo />} />
               <Route path="/account/information" element={<AccountInfo />} />
               <Route path="/account/security" element={<PasswordAndSecurity />} />
               <Route path="/booking" element={<Booking />} />
