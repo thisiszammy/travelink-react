@@ -15,3 +15,4 @@
 .drawer.closed ~ .account-content {
   margin-left: 0; /* No extra margin when drawer is closed */
 }
+

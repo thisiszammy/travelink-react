@@ -9,6 +9,8 @@ import TravelinkAppShell from './components/TravelinkAppShell';
 import { MantineProvider } from '@mantine/core';
 import AddTripForm from './pages/addTripForm/AddTripForm';
 import Landing from './pages/landingPage/Landing';
+import AccountInfo from './pages/profilePage/AccountInfo';
+import PasswordAndSecurity from './pages/profilePage/PasswordAndSecurity';
 import BookingForm from './pages/bookingForm/BookingForm';
 import SearchTrip from './pages/searchtripPage/SearchTrip';
 import AboutUsContactUs from './pages/about&contactusPage/About&ContactUs';
@@ -33,6 +35,8 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/account" element={<ProtectedRoute element={<Account />} />} />
+          <Route path="/account/information" element={<AccountInfo />} />
+          <Route path="/account/security" element={<PasswordAndSecurity />} />
           <Route path="/booking" element={<ProtectedRoute element={<Booking />} />} />
           <Route path='/landing' element={<ProtectedRoute element={<Landing />} />} />
           <Route path='/catalog' element={<ProtectedRoute element={<CatalogPage />} />} />
