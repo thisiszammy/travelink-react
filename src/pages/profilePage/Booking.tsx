@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import Drawer from '../../components/Drawer/Drawer';
 import './Booking.css';
-//import NavigationBar from '../../components/NavigationBar';
-//import TopBar from '../../components/TopBar';
 import TopBar from '../../components/LandingNavBar';
-import Paper from '@mui/material/Paper';
 import { useAuth } from '../../utils/AuthContext';
 import { Timestamp, collection, query, where, onSnapshot, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../data/firebaseConfig';

@@ -89,11 +89,11 @@ const TopBar: React.FC = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className="absolute left-0 mt-2 w-48 bg-gray-500 text-white rounded shadow-lg"
                 >
-                  <Link to="/privatetour1" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Whale Shark + Tumalog Falls + Sumilon Sandbar + Kawasan Falls</Link>
-                  <Link to="/privatetour2" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Whale Shark + Tumalog Falls + Kawasan Falls + Pescador Island</Link>
-                  <Link to="/privatetour3" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Private Twin City Tour with Uphill</Link>
-                  <Link to="/privatetour4" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Cebu Safari and Adventure Park Tour</Link>
-                  <Link to="/privatetour5" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Bantayan Island Day Tour</Link>
+                  <Link to="/package1" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Whale Shark + Tumalog Falls + Sumilon Sandbar + Kawasan Falls</Link>
+                  <Link to="/package2" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Whale Shark + Tumalog Falls + Kawasan Falls + Pescador Island</Link>
+                  <Link to="/package3" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Private Twin City Tour with Uphill</Link>
+                  <Link to="/package4" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Cebu Safari and Adventure Park Tour</Link>
+                  <Link to="/package5" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Bantayan Island Day Tour</Link>
                 </motion.div>
               )}
             </AnimatePresence>
