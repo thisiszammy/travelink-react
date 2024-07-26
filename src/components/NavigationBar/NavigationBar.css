@@ -2,8 +2,7 @@
 .navbar {
     width: 100px;
     height: 500vh;
-    
-    background-color: ']6t5';
+    background-color: #002B4A;
     display: flex;
     flex-direction: column;
     padding: 20px;
