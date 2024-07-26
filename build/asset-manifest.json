@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8c23e7f7.css",
+    "main.js": "/static/js/main.8efce511.js",
+    "static/js/453.6c4b33a5.chunk.js": "/static/js/453.6c4b33a5.chunk.js",
+    "static/media/waves2.0.jpg": "/static/media/waves2.0.31e22dca2bdce938aeac.jpg",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/travelinklogo.png": "/static/media/travelinklogo.0a3a2d3638702abdc6ce.png",
+    "static/media/fontawesome-webfont.eot": "/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "index.html": "/index.html",
+    "main.8c23e7f7.css.map": "/static/css/main.8c23e7f7.css.map",
+    "main.8efce511.js.map": "/static/js/main.8efce511.js.map",
+    "453.6c4b33a5.chunk.js.map": "/static/js/453.6c4b33a5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8c23e7f7.css",
+    "static/js/main.8efce511.js"
+  ]
+}

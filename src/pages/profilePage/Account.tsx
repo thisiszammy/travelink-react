@@ -2,14 +2,12 @@
 import React from 'react';
 import Drawer from '../../components/Drawer';
 import './Account.css';
-import NavigationBar from '../../components/NavigationBar';
-import TopBar from '../../components/TopBar';
+import TopBar from '../../components/LandingNavBar';
 
 const Account: React.FC = () => {
 
   return (
     <div className="app-container">
-      <NavigationBar/>
       <TopBar/>
         <div className="relative ml-[80px] account-page content w-100 h-screen">
           <Drawer />
