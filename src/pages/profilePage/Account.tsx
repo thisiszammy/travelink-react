@@ -2,7 +2,7 @@
 import React from 'react';
 import Drawer from '../../components/Drawer';
 import './Account.css';
-import TopBar from '../../components/TopBar';
+import TopBar from '../../components/LandingNavBar';
 
 const Account: React.FC = () => {
 

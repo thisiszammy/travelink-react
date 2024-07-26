@@ -11,7 +11,7 @@ import cebuBay6 from '../../res/images/cebu2.jpg';
 import lastMinuteDealImage from '../../res/images/last-minute.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHotel, faCar, faStar, faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
-import TopBar from '../../components/TopBar';
+import TopBar from '../../components/LandingNavBar';
 import Lottie from 'lottie-react';
 import animationData from '../../res/animations/Traveling.json';
 import { motion } from 'framer-motion';

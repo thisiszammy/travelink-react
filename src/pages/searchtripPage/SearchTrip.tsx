@@ -7,7 +7,7 @@ import { TableTrips, getDocs } from '../../data/firebaseConfig';
 import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button } from '@mantine/core';
 import BookingForm from '../bookingForm/BookingForm';
-import TopBar from '../../components/TopBar';
+import TopBar from '../../components/LandingNavBar';
 
 interface Trip {
   id: string;

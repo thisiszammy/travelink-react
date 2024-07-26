@@ -1,3 +1,4 @@
+// src/components/pages/addTripForm/leafletmap/LeafletMap.tsx
 import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -12,6 +13,7 @@ L.Icon.Default.mergeOptions({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
 });
+
 interface LeafletMapProps {
   onSelectLocation: (lat: number, lng: number, address: string) => void;
 }

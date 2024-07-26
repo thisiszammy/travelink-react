@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import hotelAnimation from '../res/animations/Hotel.json'; 
-import TopBar from '../components/TopBar';
+import TopBar from '../components/LandingNavBar';
 import HotelBookingModal from './HotelBookingModal';
 
 import backgroundImage from '../res/images/background.jpg';

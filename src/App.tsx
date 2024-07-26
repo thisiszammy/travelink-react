@@ -17,7 +17,7 @@ import { AuthProvider } from './utils/AuthContext';
 import ProtectedRoute from './utils/ProtectedRoute';
 import Account from './pages/profilePage/Account';
 import Booking from './pages/profilePage/Booking';
-import TopBar from './components/TopBar';
+import TopBar from './components/LandingNavBar';
 import Drawer from './components/Drawer';
 import Hotels from './pages/Hotels';
 import Rides from './pages/Rides';

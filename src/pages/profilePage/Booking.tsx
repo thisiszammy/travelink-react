@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import TopBar from '../../components/TopBar';
+import TopBar from '../../components/LandingNavBar';
 import { useAuth } from '../../utils/AuthContext';
 import { Timestamp, collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../../data/firebaseConfig';

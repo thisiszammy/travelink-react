@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChair, faSnowflake, faCogs } from '@fortawesome/free-solid-svg-icons';
-import TopBar from '../components/TopBar';
+import TopBar from '../components/LandingNavBar';
 import RidesBookingModal from './RidesBookingModal';
 import rideImage1 from '../res/images/ride1.jpg';
 import rideImage2 from '../res/images/ride2.jpg';

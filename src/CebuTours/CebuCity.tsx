@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import cityAnimation from '../res/animations/City.json'; // Adjust the animation path
-import TopBar from '../components/TopBar';
+import TopBar from '../components/LandingNavBar';
 import BookingFormModal from '../pages/bookingForm/BookingFormModal';
 import cityImage1 from '../res/images/magellan.jpg';
 import cityImage2 from '../res/images/stonino.jpg';

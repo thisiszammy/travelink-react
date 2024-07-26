@@ -10,7 +10,7 @@ import { Timestamp, addDoc, collection, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../data/firebaseConfig';
 import Swal from 'sweetalert2'
 import { useAuth } from '../../utils/AuthContext';
-import TopBar from '../../components/TopBar';
+import TopBar from '../../components/LandingNavBar';
 
 
 interface LatLng {

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import islandAnimation from '../res/animations/Island.json'; // Adjust the animation path
-import TopBar from '../components/TopBar';
+import TopBar from '../components/LandingNavBar';
 import BookingFormModal from '../pages/bookingForm/BookingFormModal';
 
 import backgroundImage from '../res/images/background.jpg';
