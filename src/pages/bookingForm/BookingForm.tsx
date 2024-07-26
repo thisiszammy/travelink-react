@@ -332,5 +332,3 @@ const BookingForm: React.FC<BookingFormProps> = ({id, DestinationName, close}) =
 }
 
 export default BookingForm
-
-

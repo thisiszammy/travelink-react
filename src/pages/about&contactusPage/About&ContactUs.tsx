@@ -37,8 +37,6 @@ const AboutAndContactUs = () => {
             <h3 className="font-semibold text-xl mb-2">Contact Information</h3>
             <p>Email: travelink@gmail.com</p>
             <p>Phone: +63 997 682 8086</p>
-            
-
           </div>
         </motion.section>
 

@@ -8,6 +8,8 @@ import { useDisclosure } from '@mantine/hooks';
 import { Modal, Button } from '@mantine/core';
 import BookingForm from '../bookingForm/BookingForm';
 import TopBar from '../../components/LandingNavBar';
+import NavigationBar from '../../components/NavigationBar';
+import TopBar from '../../components/TopBar';
 
 interface Trip {
   id: string;
@@ -222,4 +224,3 @@ const SearchTrip: React.FC = () => {
 };
 
 export default SearchTrip;
-

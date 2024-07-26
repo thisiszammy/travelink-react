@@ -27,8 +27,6 @@ import SouthCebu from './CebuTours/SouthCebu';
 import CebuCity from './CebuTours/CebuCity';
 import Confirm from './pages/Confirmation';
 import './App.css';
-
-
 const App: React.FC = () => {
   return (
     <AuthProvider>

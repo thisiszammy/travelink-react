@@ -55,6 +55,7 @@ const NavigationBar: React.FC = () => {
           <span>Booking</span>
         </button>
       </div>
+
     </div>
   );
 };
