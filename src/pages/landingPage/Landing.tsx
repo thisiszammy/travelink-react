@@ -70,7 +70,7 @@ const Landing: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setSlideshowIndex((prevIndex) => (prevIndex + 1) % headerTexts.length);
-    }, 8000); // Change slide every 8 seconds
+    }, 8000); 
     return () => clearInterval(interval);
   }, []);
 

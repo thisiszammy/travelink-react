@@ -187,7 +187,7 @@ const PasswordAndSecurity: React.FC = () => {
             <form className="two-factor-form">
               <label>
                 Enter Mobile Number for OTP
-                <div className="otp-input">
+                <div className="otp-input text-black">
                   <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                   <button type="button" onClick={handleSendOtp}>Send OTP</button>
                 </div>
@@ -207,6 +207,7 @@ const PasswordAndSecurity: React.FC = () => {
         </div>
       )}
     </div>
+    
   );
 };
 

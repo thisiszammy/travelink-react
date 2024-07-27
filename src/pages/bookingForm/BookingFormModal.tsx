@@ -74,7 +74,7 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
     }
 
     try {
-      await addDoc(collection(db, 'bookingReceipts'), bookingData);
+      await addDoc(collection(db, 'BookingTours'), bookingData);
       Swal.fire({
         title: 'Success!',
         text: 'Booked successfully!',
@@ -179,7 +179,7 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
               name="price"
               type="text"
               readOnly
-              value={`₱${price}`}
+              value={`${price}`}
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
             />
           </div>

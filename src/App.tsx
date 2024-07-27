@@ -32,6 +32,9 @@ import Package3 from './pages/Package3';
 import Package4 from './pages/Package4';
 import Package5 from './pages/Package5';
 import PackageModal from './pages/PackageModal';
+import TripDetails from './pages/BookingTrip';
+import BookedRides from './pages/BookedRides';
+import BookedHotels from './pages/BookedHotelRooms';
 
 
 import './App.css';
@@ -47,6 +50,9 @@ const App: React.FC = () => {
           <Route path='/landing' element={<ProtectedRoute element={<Landing />} />} />
           <Route path='/catalog' element={<ProtectedRoute element={<CatalogPage />} />} />
           <Route path='/confirmation' element={<ProtectedRoute element={<Confirm />} />} />
+          <Route path='/bookedrides'  element={<BookedRides />} />
+          <Route path='/bookedhotelrooms'  element={<BookedHotels />} />
+          <Route path='/bookingtrip'  element={<TripDetails />} />
           <Route path='/faq'  element={<FAQ />} />
           <Route path='/northcebu'  element={<NorthCebu />} />
           <Route path='/southcebu'  element={<SouthCebu />} />

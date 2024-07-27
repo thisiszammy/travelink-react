@@ -1,14 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './about-contact-us-page.css';
 import { motion } from 'framer-motion';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import emailjs from 'emailjs-com';
 import TopBar from '../../components/LandingNavBar';
+import Swal from 'sweetalert2';
 
 const AboutAndContactUs = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message,
+      to_name: 'Travelink Team',
+    };
+    try {
+      await emailjs.send('service_al8u5gq', 'template_vru1psh', templateParams, 'T1-lD4rd0KGN9IXnJ');
+      Swal.fire({
+        title: 'Success!',
+        text: 'Your message has been sent successfully.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+      setFormData({
+        name: '',
+        email: '',
+        message: '',
+      });
+    } catch (error) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error sending your message. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    }
+  };
+
   return (
     <div className="about-contact-us-page container mx-auto p-4">
       <TopBar />
-      <br></br>
+      <br />
       <main className="main mt-4">
         <motion.section
           className="content p-4 bg-white rounded-lg shadow-lg mb-8"
@@ -29,8 +73,8 @@ const AboutAndContactUs = () => {
             Whether you are looking for a relaxing beach vacation, an adventurous mountain hike, or a cultural city tour,
             TraveLink has got you covered. Join us in exploring the wonders of the world, one trip at a time.
           </p>
-          <div className="contact-info mt-4 bg-blue-50 p-4 rounded-lg">
-            <h3 className="font-semibold text-xl mb-2">Contact Information</h3>
+          <div className="contact-info mt-4 bg-blue-50 p-4 rounded-lg text-white">
+            <h3 className="font-semibold text-xl mb-2 text-white">Contact Information</h3>
             <p>Email: travelink@gmail.com</p>
             <p>Phone: +63 997 682 8086</p>
           </div>
@@ -43,11 +87,14 @@ const AboutAndContactUs = () => {
           transition={{ duration: 0.3 }}
         >
           <h2 className="font-semibold text-2xl mb-4 border-b pb-2">Contact Us</h2>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label className="block text-lg mb-2">Name</label>
               <input
                 type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 className="w-full p-3 border rounded-lg focus:ring focus:ring-blue-200"
                 required
               />
@@ -56,6 +103,9 @@ const AboutAndContactUs = () => {
               <label className="block text-lg mb-2">Email</label>
               <input
                 type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 className="w-full p-3 border rounded-lg focus:ring focus:ring-blue-200"
                 required
               />
@@ -63,36 +113,39 @@ const AboutAndContactUs = () => {
             <div>
               <label className="block text-lg mb-2">Message</label>
               <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 className="w-full p-3 border rounded-lg focus:ring focus:ring-blue-200"
                 required
               />
             </div>
             <button
-  className="relative inline-flex h-12 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none justify-between"
->
-  <span
-    className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"
-  >
-  </span>
-  <span
-    className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined"
-  >
-    Contact Us
-    <svg
-      stroke="currentColor"
-      fill="currentColor"
-      stroke-width="0"
-      viewBox="0 0 448 512"
-      height="1em"
-      width="1em"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8H224V432c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z"
-      ></path>
-    </svg>
-  </span>
-</button>
+              className="relative inline-flex h-12 active:scale-95 transition overflow-hidden rounded-lg p-[1px] focus:outline-none justify-between"
+            >
+              <span
+                className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"
+              >
+              </span>
+              <span
+                className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-lg bg-slate-950 px-7 text-sm font-medium text-white backdrop-blur-3xl gap-2 undefined"
+              >
+                Contact Us
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  stroke-width="0"
+                  viewBox="0 0 448 512"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M429.6 92.1c4.9-11.9 2.1-25.6-7-34.7s-22.8-11.9-34.7-7l-352 144c-14.2 5.8-22.2 20.8-19.3 35.8s16.1 25.8 31.4 25.8H224V432c0 15.3 10.8 28.4 25.8 31.4s30-5.1 35.8-19.3l144-352z"
+                  ></path>
+                </svg>
+              </span>
+            </button>
           </form>
         </motion.section>
       </main>

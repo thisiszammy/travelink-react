@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faChevronDown, faUser, faBars, faTimes, faBook, faMagnifyingGlass, faHouse, faCaretDown, faAddressCard, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import {faCar, faBell, faChevronDown, faUser, faBars, faTimes, faBook, faMagnifyingGlass, faHouse, faCaretDown, faAddressCard, faQuestionCircle, faFlag, faHotel } from '@fortawesome/free-solid-svg-icons';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
@@ -153,7 +153,30 @@ const TopBar: React.FC = () => {
           <span>Booking</span>
         </button>
         <button
-          className={`nav-button ${activeButton === '/faq' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          onClick={() => handleClick('/bookingtrip')}
+        >
+          <FontAwesomeIcon icon={faFlag} className="mr-2" />
+          <span>Trip Details</span>
+        </button>
+        <button
+          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          onClick={() => handleClick('/bookedhotelrooms')}
+        >
+          <FontAwesomeIcon icon={faHotel} className="mr-2" />
+          <span>Booked Hotel Rooms</span>
+        </button>
+
+        <button
+          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          onClick={() => handleClick('/bookedrides')}
+        >
+          <FontAwesomeIcon icon={faCar} className="mr-2" />
+          <span>Booked Rides</span>
+        </button>
+
+        <button
+         className={`nav-button ${activeButton === '/faq' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
           onClick={() => handleClick('/faq')}
         >
           <FontAwesomeIcon icon={faQuestionCircle} className="mr-2" />

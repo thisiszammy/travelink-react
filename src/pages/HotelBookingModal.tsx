@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../data/firebaseConfig';
-import { useAuth } from '../utils/AuthContext'; // Import useAuth
+import { useAuth } from '../utils/AuthContext';
 import emailjs from 'emailjs-com';
 
 interface BookingFormModalProps {
@@ -17,7 +17,7 @@ interface BookingFormModalProps {
 }
 
 const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, name, price }) => {
-  const { user } = useAuth(); // Use useAuth to get the user object
+  const { user } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState('');
   const [otp, setOtp] = useState('');
   const [gcashNumber, setGcashNumber] = useState('');
@@ -72,7 +72,7 @@ const BookingFormModal: React.FC<BookingFormModalProps> = ({ isOpen, onClose, na
     }
 
     try {
-      await addDoc(collection(db, 'BookingHotel'), bookingData);
+      await addDoc(collection(db, 'BookedHotelRooms'), bookingData); 
       Swal.fire({
         title: 'Success!',
         text: 'Booked successfully!',
