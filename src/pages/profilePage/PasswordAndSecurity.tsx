@@ -1,10 +1,12 @@
+import './PasswordAndSecurity.css';
 import React, { useState, useEffect } from 'react';
 import Drawer from '../../components/Drawer/Drawer';
-import './PasswordAndSecurity.css';
 import TopBar from '../../components/LandingNavBar';
 import { auth, signInWithPhoneNumber } from '../../data/firebaseConfig';
 import Swal from 'sweetalert2';
 import { reauthenticateWithCredential, EmailAuthProvider, updatePassword } from 'firebase/auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const PasswordAndSecurity: React.FC = () => {
   const [showChangePassword, setShowChangePassword] = useState(false);
@@ -15,6 +17,9 @@ const PasswordAndSecurity: React.FC = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmNewPassword, setShowConfirmNewPassword] = useState(false);
 
   const handleOpenChangePassword = () => setShowChangePassword(true);
   const handleCloseChangePassword = () => {
@@ -153,26 +158,34 @@ const PasswordAndSecurity: React.FC = () => {
       </div>
 
       {showChangePassword && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseChangePassword}>&times;</span>
-            <h2>Change Password</h2>
-            <form className="password-form">
-              <label>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4">Change Password</h2>
+            <form className="space-y-4">
+              <label className="block">
                 Enter Old Password
-                <input className='text-black' type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                <div className="flex items-center mt-1">
+                  <input className='text-black border rounded-md px-2 py-1 flex-grow' type={showOldPassword ? "text" : "password"} value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} />
+                  <FontAwesomeIcon icon={showOldPassword ? faEyeSlash : faEye} onClick={() => setShowOldPassword(!showOldPassword)} className="ml-2 cursor-pointer" />
+                </div>
               </label>
-              <label>
+              <label className="block">
                 Enter New Password
-                <input className='text-black' type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                <div className="flex items-center mt-1">
+                  <input className='text-black border rounded-md px-2 py-1 flex-grow' type={showNewPassword ? "text" : "password"} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
+                  <FontAwesomeIcon icon={showNewPassword ? faEyeSlash : faEye} onClick={() => setShowNewPassword(!showNewPassword)} className="ml-2 cursor-pointer" />
+                </div>
               </label>
-              <label>
+              <label className="block">
                 Confirm New Password
-                <input className='text-black' type="password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
+                <div className="flex items-center mt-1">
+                  <input className='text-black border rounded-md px-2 py-1 flex-grow' type={showConfirmNewPassword ? "text" : "password"} value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} />
+                  <FontAwesomeIcon icon={showConfirmNewPassword ? faEyeSlash : faEye} onClick={() => setShowConfirmNewPassword(!showConfirmNewPassword)} className="ml-2 cursor-pointer" />
+                </div>
               </label>
-              <div className="form-buttons">
-                <button type="button" onClick={handleChangePassword}>Apply Changes</button>
-                <button type="button" onClick={handleCloseChangePassword}>Cancel</button>
+              <div className="flex justify-end space-x-4 mt-4">
+                <button type="button" onClick={handleChangePassword} className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Apply Changes</button>
+                <button type="button" onClick={handleCloseChangePassword} className="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400">Cancel</button>
               </div>
             </form>
           </div>
@@ -180,34 +193,33 @@ const PasswordAndSecurity: React.FC = () => {
       )}
 
       {showTwoFactor && (
-        <div className="modal">
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseTwoFactor}>&times;</span>
-            <h2>Two-Factor Authentication</h2>
-            <form className="two-factor-form">
-              <label>
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <span className="text-gray-500 hover:text-gray-800 cursor-pointer text-xl" onClick={handleCloseTwoFactor}>&times;</span>
+            <h2 className="text-2xl font-bold mb-4">Two-Factor Authentication</h2>
+            <form className="space-y-4">
+              <label className="block">
                 Enter Mobile Number for OTP
-                <div className="otp-input text-black">
-                  <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-                  <button type="button" onClick={handleSendOtp}>Send OTP</button>
+                <div className="flex items-center mt-1">
+                  <input type="text" className="text-black border rounded-md px-2 py-1 flex-grow" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                  <button type="button" onClick={handleSendOtp} className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 ml-2">Send OTP</button>
                 </div>
               </label>
               {otpSent && (
-                <label>
+                <label className="block">
                   Confirm OTP
-                  <input type="text" value={otp} onChange={(e) => setOtp(e.target.value)} />
+                  <input type="text" className="text-black border rounded-md px-2 py-1 mt-1" value={otp} onChange={(e) => setOtp(e.target.value)} />
                 </label>
               )}
-              <div className="form-buttons">
-                <button type="button" onClick={handleVerifyOtp}>Apply Changes</button>
-                <button type="button" onClick={handleCloseTwoFactor}>Cancel</button>
+              <div className="flex justify-end space-x-4 mt-4">
+                <button type="button" onClick={handleVerifyOtp} className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Apply Changes</button>
+                <button type="button" onClick={handleCloseTwoFactor} className="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400">Cancel</button>
               </div>
             </form>
           </div>
         </div>
       )}
     </div>
-    
   );
 };
 

@@ -54,6 +54,15 @@ const typewriterVariants = {
   }),
 };
 
+const tour = {
+  name: 'Sample Tour',
+  ratePerPerson: ['₱11800', '₱6400', '₱5200', '₱4800', '₱4400', '₱4200', '₱4000', '₱3800', '₱3700', '₱3600', '₱3500', '₱3400'],
+  inclusions: ['Private Tour', 'Private Transportation', 'Local Guide', 'Snorkeling or Swimming Fee with the whale sharks', 'Light breakfast', 'Lunch with soft drinks or water', 'Entrance fees and whale shark watching fees', 'Boat ride and life vest', 'Motorboat going to Sumilon Sandbar (Shared)', 'Island Entrance Fee', 'Tumalog Falls (entrance fee included) – (temporarily closed)', 'Trip to Kawasan Water Falls with Tour Guide (entrance fees included)', 'Government taxes and fees'],
+  exclusions: ['Camera Rental (₱1000 for GoPro Hero5 and up – SD Card not included) – (bring micro SD Class 10)', 'Canyoneering Add-on (₱1500 per head – not recommended if peak season)'],
+  itinerary: ['04:00AM – Hotel pick up from Cebu City or Mactan', '06:30AM – ETA Oslob / Eat Breakfast', '07:00AM – Swim with the whale sharks', '07:30AM – Visit Tumalog Falls (temporarily closed)', '09:00AM – Go to Sumilon Sandbar', '11:30AM – Lunch (included in the package)', '12:30PM – Proceed to Badian for Kawasan Falls', '04:30PM – Go back to Hotel in Cebu City', '07:30PM – Estimated Drop off Hotel in Cebu City'],
+  whatToExpect: ['You will be picked up from your hotel early in the morning by our experienced and DOT accredited driver, and you will be taken here to eat your light breakfast which is just few minutes away from the whale sharks.']
+};
+
 const Landing: React.FC = () => {
   const navigate = useNavigate();
   const [popularCount, setPopularCount] = useState(4);
@@ -61,7 +70,7 @@ const Landing: React.FC = () => {
   const [beachTourCount, setBeachTourCount] = useState(4);
   const [slideshowIndex, setSlideshowIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTour, setSelectedTour] = useState(null);
+  const [selectedTour, setSelectedTour] = useState<any>(null);
   const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({ name: '', price: '' });
 
@@ -531,4 +540,3 @@ const Landing: React.FC = () => {
 };
 
 export default Landing;
-

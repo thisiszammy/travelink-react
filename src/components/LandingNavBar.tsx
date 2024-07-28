@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faCar, faBell, faChevronDown, faUser, faBars, faTimes, faBook, faMagnifyingGlass, faHouse, faCaretDown, faAddressCard, faQuestionCircle, faFlag, faHotel } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCar, faBell, faChevronDown, faUser, faBars, faTimes, faBook, faMagnifyingGlass,
+  faHouse, faCaretDown, faAddressCard, faQuestionCircle, faFlag, faHotel
+} from '@fortawesome/free-solid-svg-icons';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,6 +19,7 @@ const TopBar: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [cebuDropdownOpen, setCebuDropdownOpen] = useState<boolean>(false);
   const [privateToursDropdownOpen, setPrivateToursDropdownOpen] = useState<boolean>(false);
+  const [bookingDropdownOpen, setBookingDropdownOpen] = useState<boolean>(false);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -33,7 +37,7 @@ const TopBar: React.FC = () => {
     try {
       await auth.signOut();
       console.log('Logged out');
-      navigate ('/login')
+      navigate('/login');
     } catch (error) {
       console.error('Logout error:', error);
     }
@@ -69,7 +73,7 @@ const TopBar: React.FC = () => {
                   className="absolute left-0 mt-2 w-48 bg-gray-500 text-white rounded shadow-lg"
                 >
                   <Link to="/northcebu" className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setCebuDropdownOpen(false)}>North Cebu</Link>
-                  <Link to="/cebucity"  className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setCebuDropdownOpen(false)}>Cebu City</Link>
+                  <Link to="/cebucity" className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setCebuDropdownOpen(false)}>Cebu City</Link>
                   <Link to="/southcebu" className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setCebuDropdownOpen(false)}>South Cebu</Link>
                 </motion.div>
               )}
@@ -95,6 +99,29 @@ const TopBar: React.FC = () => {
                   <Link to="/package3" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Private Twin City Tour with Uphill</Link>
                   <Link to="/package4" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Cebu Safari and Adventure Park Tour</Link>
                   <Link to="/package5" className="block px-2 py-3 text-white hover:bg-gray-900 no-underline" onClick={() => setPrivateToursDropdownOpen(false)}>Bantayan Island Day Tour</Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          <div className="relative">
+            <button
+              onClick={() => setBookingDropdownOpen(!bookingDropdownOpen)}
+              className="bg-transparent text-white hover:text-blue-500 no-underline py-2 px-2 rounded-full focus:outline-none flex items-center"
+            >
+              Booking <FontAwesomeIcon icon={faCaretDown} className="ml-1" />
+            </button>
+            <AnimatePresence>
+              {bookingDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute left-0 mt-2 w-48 bg-gray-500 text-white rounded shadow-lg"
+                >
+                  <Link to="/bookedsearchtrips" className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setBookingDropdownOpen(false)}>Booked Search Trips</Link>
+                  <Link to="/bookingtrip" className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setBookingDropdownOpen(false)}>Trip Details</Link>
+                  <Link to="/bookedhotelrooms" className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setBookingDropdownOpen(false)}>Booked Hotel Rooms</Link>
+                  <Link to="/bookedrides" className="block px-4 py-2 text-white hover:bg-gray-900 no-underline" onClick={() => setBookingDropdownOpen(false)}>Booked Rides</Link>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -146,37 +173,7 @@ const TopBar: React.FC = () => {
           <span>Search</span>
         </button>
         <button
-          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
-          onClick={() => handleClick('/booking')}
-        >
-          <FontAwesomeIcon icon={faBook} className="mr-2" />
-          <span>Booking</span>
-        </button>
-        <button
-          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
-          onClick={() => handleClick('/bookingtrip')}
-        >
-          <FontAwesomeIcon icon={faFlag} className="mr-2" />
-          <span>Trip Details</span>
-        </button>
-        <button
-          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
-          onClick={() => handleClick('/bookedhotelrooms')}
-        >
-          <FontAwesomeIcon icon={faHotel} className="mr-2" />
-          <span>Booked Hotel Rooms</span>
-        </button>
-
-        <button
-          className={`nav-button ${activeButton === '/booking' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
-          onClick={() => handleClick('/bookedrides')}
-        >
-          <FontAwesomeIcon icon={faCar} className="mr-2" />
-          <span>Booked Rides</span>
-        </button>
-
-        <button
-         className={`nav-button ${activeButton === '/faq' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
+          className={`nav-button ${activeButton === '/faq' ? 'bg-blue-500' : ''} text-white py-2 px-4 my-2 rounded flex items-center`}
           onClick={() => handleClick('/faq')}
         >
           <FontAwesomeIcon icon={faQuestionCircle} className="mr-2" />
