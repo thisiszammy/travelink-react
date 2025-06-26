@@ -22,7 +22,7 @@
     "@mui/material": "^5.16.4",
     "@mui/x-date-pickers": "^7.11.0",
     "@mui/icons-material": "^5.16.0",
-    "@mui/styles": "^5.16.4",
+    "@mui/styles": "^6.4.8",
     "@mui/x-data-grid": "^7.11.0",
     "@react-google-maps/api": "^2.19.3",
     "@testing-library/jest-dom": "^5.17.0",
